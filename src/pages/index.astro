@@ -1,19 +1,68 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Article from "../components/Article.astro";
+
+// まだMarkdown（contentコレクション）の作成や設定（config.ts）が終わっていなくても
+// 画面がクラッシュしないよう、安全のために初期状態のダミーデータを配列として定義しています。
+// 今後、Markdownからの自動読み込みに移行する際も、この構造をそのまま引き継げます。
+const posts = [
+  {
+    slug: "docker-permission-fixed",
+    data: {
+      title: "Linux Mint サーバーの Docker 権限バグ解消手順",
+      pubDate: new Date("2026-05-28"),
+      description:
+        "permission denied ログを安全に解消し、sudoなしでDocker Composeを安全に回すまでの作業ログと権限グループ設定。",
+      tags: ["Docker", "Linux Mint", "Infra"],
+    },
+  },
+  {
+    slug: "astro-tailwind-minimalism",
+    data: {
+      title: "Astro v5 + Tailwind CSS で作るソリッド・ミニマルな思想",
+      pubDate: new Date("2026-05-29"),
+      description:
+        "無駄な装飾を徹底的に削ぎ落とし、ブロック分けの美学を追求するWebサイト構築記録。ベージュに映える工業的な赤の差し色。",
+      tags: ["Astro", "Tailwind", "Design"],
+    },
+  },
+];
 ---
 
-<Layout>
-  <div class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="p-8 max-w-sm bg-white rounded-2xl shadow-xl border border-gray-200 transition transform hover:scale-105 duration-300">
-      <div class="text-2xl font-bold text-indigo-600 mb-2">🎉 Phase 3 クリア！</div>
-      <p class="text-gray-600 leading-relaxed">
-        VSCodeからリモート編集し、TailwindCSSのスタイルが完全に反映されました。爆速開発環境の完成です！
-      </p>
-      <div class="mt-6">
-        <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full font-semibold">Linux Mint</span>
-        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-semibold ml-2">Astro</span>
-        <span class="inline-block bg-teal-100 text-teal-800 text-xs px-3 py-1 rounded-full font-semibold ml-2">Tailwind</span>
+<Layout title="BLOG">
+  <!-- メインビジュアル：横幅いっぱいの無骨なソリッドブロック -->
+  <section class="border-b-[3px] border-[#202836] bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="flex items-center space-x-2.5 mb-6">
+        <span class="w-3.5 h-3.5 bg-[#D60000] rounded-full animate-pulse">
+        </span>
+        <span
+          class="text-xs font-['Fira_Code'] font-bold tracking-widest text-[#D60000] uppercase"
+          >SYSTEM NODE: ACTIVE
+        </span>
       </div>
+      <h1
+        class="text-5xl md:text-8xl font-black tracking-tighter leading-none text-[#202836] select-none"
+      >
+        SELF-HOSTING<br />
+        <span class="text-[#D60000]">LOG & LAB.</span>
+      </h1>
+      <p
+        class="mt-8 text-[#4A5568] max-w-xl font-medium text-sm md:text-base leading-relaxed"
+      >
+        自宅サーバー構築の備忘録と、技術スタックの実験場。<br />
+        Linux Mint ＋ Docker 環境で稼働しているコンテナから爆速配信中。
+      </p>
     </div>
-  </div>
+  </section>
+
+  <!-- ブログ記事一覧：フレデリックを意識したソリッド・スクエログリッド -->
+  <section class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+    <!-- 外枠を太さ3pxのスレート色で囲み、グリッドの隙間からも太い枠線が見えるソリッド構造 -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-0 border-[3px] border-[#202836] bg-[#202836]"
+    >
+      {posts.map((post) => <Article post={post} />)}
+    </div>
+  </section>
 </Layout>

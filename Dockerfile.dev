@@ -1,0 +1,17 @@
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Install deps first for better layer caching.
+COPY package*.json ./
+RUN npm ci
+
+# Copy the rest of the source for initial container build.
+COPY . .
+
+ENV HOST=0.0.0.0
+ENV PORT=4321
+
+EXPOSE 4321
+
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "4321"]

@@ -1,0 +1,65 @@
+---
+type Post = {
+	slug: string;
+	data: {
+		title: string;
+		pubDate: Date | string;
+		description: string;
+		tags?: string[];
+	};
+};
+
+const { post } = Astro.props as { post: Post };
+const pubDate = post.data.pubDate instanceof Date
+	? post.data.pubDate
+	: new Date(post.data.pubDate);
+---
+
+<article class="bg-white p-8 border-[1.5px] border-[#202836] hover:bg-[#F5F2EB] transition-all duration-300 group relative overflow-hidden">
+	<!-- 装飾用のアクティブ赤線 (ホバー時に左端からスッと出現するメカニカルギミック) -->
+	<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300"></div>
+
+	<!-- ヘッダーメタ情報 -->
+	<div class="flex items-center justify-between mb-5">
+		<div class="flex items-center gap-2">
+			<span class="w-2 h-2 bg-[#D60000] rounded-full"></span>
+			<time class="text-xs font-bold code-font text-[#A0AEC0]">
+				{pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.')}
+			</time>
+		</div>
+		<span class="text-[10px] font-['Fira_Code'] font-bold text-[#D60000] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
+			NEW
+		</span>
+	</div>
+
+	<!-- タイトル -->
+	<h2 class="text-2xl font-black text-[#202836] group-hover:text-[#D60000] transition-colors duration-200 leading-snug">
+		<a href={`/blog/${post.slug}`} class="focus:outline-none">{post.data.title}</a>
+	</h2>
+
+	<!-- あらすじ -->
+	<p class="mt-4 text-sm text-[#4A5568] line-clamp-2 leading-relaxed font-medium">
+		{post.data.description}
+	</p>
+
+	<!-- フッタータグ & Readリンク -->
+	<div class="mt-8 pt-5 border-t border-[#F1F5F9] flex items-center justify-between gap-4">
+		<div class="flex flex-wrap gap-1.5">
+			{post.data.tags?.map((tag) => (
+				<span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-2 py-0.5 uppercase tracking-wider bg-white">
+					{tag}
+				</span>
+			))}
+		</div>
+
+		<span class="text-xs font-bold text-[#202836] group-hover:text-[#D60000] transition-colors duration-200 flex items-center shrink-0">
+			READ MORE <span class="ml-1 text-[#D60000] font-bold">➔</span>
+		</span>
+	</div>
+</article>
+
+<style>
+	.code-font {
+		font-family: 'Fira Code', monospace;
+	}
+</style>

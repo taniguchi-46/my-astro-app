@@ -41,6 +41,16 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## 🐳 Docker Development (Windows)
+
+Use the dev compose to run Astro in watch mode with file sync.
+
+```sh
+docker compose -f docker-compose.dev.yml up --build
+```
+
+Then open http://localhost:4321.
+
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
