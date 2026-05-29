@@ -1,0 +1,233 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// =============================================================================
+// LINKS PAGE — 次回作業時のTODOリスト
+// =============================================================================
+//
+// TODO(優先度: 高)
+//   [ ] ① GitHubのURLを実際のkairoさんのFacebook/URLに変更する
+//         → 現在: "https://github.com/"
+//         → 変更先: "https://github.com/[kairo-username]"
+//   [ ] ② Google FormのURLを実際のフォームURLに変更する
+//         → 現在: "https://forms.google.com/"
+//         → 変更先: Google Formで作成したフォームのURLを貼り付け
+//
+// TODO(優先度: 中)
+//   [ ] ③ EXPERIMENTALカテゴリのWeb Appリンクを
+//         実際のデプロイURLに変更する（現在: "#"の工事中プレースホルダー）
+//   [ ] ④ FAVORITESカテゴリにお気に入りリンクを追加・入れ替える
+//         → 現在はフレデリック公式サイト、Coolorsの2件のみ
+//   [ ] ⑤ LEARNINGカテゴリに技術スタック別のおすすめ記事リンクを追加する
+//         （現在はAstro/Docker/Linux/Tailwindの4件）
+//
+// TODO(優先度: 低)
+//   [ ] ⑥ 新しいカテゴリの追加（例: SNSリンクカテゴリやツールカテゴリなど）
+//         → categories配列にエントリを追加するだけで自動表示される
+//   [ ] ⑦ 各リンクのdescriptionテキストを実際の言葉に微調整する
+//
+// =============================================================================
+
+// リンクデータ（カテゴリ別）
+// TODO ①②: 各urlフィールドを実際のURLに変更する
+const categories = [
+  {
+    id: "01",
+    key: "DEV_PROFILE",
+    label: "DEV & PROFILE",
+    sub: "CORE // IDENTITY",
+    links: [
+      {
+        title: "GitHub",
+        url: "https://github.com/", // TODO ①: "https://github.com/[kairoのusername]" に変更
+        description: "ソースコード・リポジトリの管理ハブ。全プロジェクトの起点。",
+        badge: "CORE",
+        badgeColor: "bg-[#202836] text-white",
+      },
+      {
+        title: "PROFILE PAGE",
+        url: "/profile",
+        description: "自己紹介、スキル、および自宅ラボのハードウェア構成一覧。",
+        badge: "INTERNAL",
+        badgeColor: "bg-[#EFEAE2] text-[#202836] border border-[#202836]",
+      },
+      {
+        title: "BLOG",
+        url: "/",
+        description: "自宅サーバー構築記録と技術スタック実験の備忘録。",
+        badge: "INTERNAL",
+        badgeColor: "bg-[#EFEAE2] text-[#202836] border border-[#202836]",
+      },
+    ],
+  },
+  {
+    id: "02",
+    key: "LEARNING",
+    label: "LEARNING & SOURCE",
+    sub: "KNOWLEDGE // BASE",
+    links: [
+      {
+        title: "Zenn — Astro",
+        url: "https://zenn.dev/topics/astro",
+        description: "Astro v5 関連の日本語技術記事が集まる良質なトピックハブ。",
+        badge: "ASTRO",
+        badgeColor: "bg-[#D60000] text-white",
+      },
+      {
+        title: "Zenn — Docker",
+        url: "https://zenn.dev/topics/docker",
+        description: "Dockerコンテナ化に関する実践的な記事と知見が豊富。",
+        badge: "DOCKER",
+        badgeColor: "bg-[#D60000] text-white",
+      },
+      {
+        title: "Qiita — Linux",
+        url: "https://qiita.com/tags/linux",
+        description: "Linux Mint / Debian系のトラブルシューティング記事を多数収録。",
+        badge: "LINUX",
+        badgeColor: "bg-[#202836] text-white",
+      },
+      {
+        title: "Tailwind CSS Docs",
+        url: "https://tailwindcss.com/docs",
+        description: "Tailwindの公式ドキュメント。クラスの探索と仕様確認の最前線。",
+        badge: "CSS",
+        badgeColor: "bg-[#202836] text-white",
+      },
+    ],
+  },
+  {
+    id: "03",
+    key: "EXPERIMENTAL",
+    label: "EXPERIMENTAL & APPS",
+    sub: "LAB // WORKS",
+    links: [
+      {
+        title: "Web App (Coming Soon)",
+        url: "#", // TODO ③: 実際のWeb AppデプロイURLに変更
+        description: "現在開発中のWebアプリケーション。詳細は後日公開予定。",
+        badge: "WIP",
+        badgeColor: "bg-[#A0AEC0] text-white",
+      },
+    ],
+  },
+  {
+    id: "04",
+    key: "COMMUNICATION",
+    label: "COMMUNICATION",
+    sub: "CONTACT // FORM",
+    links: [
+      {
+        title: "Google Form — お問い合わせ",
+        url: "https://forms.google.com/", // TODO ②: 実際のGoogle Form URLに変更
+        description: "フィードバック、コラボレーション依頼、その他お問い合わせはこちら。",
+        badge: "CONTACT",
+        badgeColor: "bg-[#D60000] text-white",
+      },
+    ],
+  },
+  {
+    id: "05",
+    key: "FAVORITES",
+    label: "FAVORITES",
+    sub: "CURATION // LIST",
+    // TODO ④: お気に入りリンクを追加・入れ替える（以下の links 配列にエントリを追加）
+    links: [
+      {
+        title: "フレデリック — Official",
+        url: "https://www.frederic.jp/",
+        description: "このサイトのデザインに最大のインスピレーションを与えてくれたバンド。",
+        badge: "FAV",
+        badgeColor: "bg-[#D60000] text-white",
+      },
+      {
+        title: "Coolors — Color Palette",
+        url: "https://coolors.co/",
+        description: "カラーパレット生成の最強ツール。配色の洗練に欠かせない。",
+        badge: "DESIGN",
+        badgeColor: "bg-[#202836] text-white",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="LINKS">
+  <!-- ページタイトル：無骨なソリッドヘッダー -->
+  <section class="border-b-[3px] border-[#202836] bg-white">
+    <div class="max-w-3xl mx-auto px-6 py-16 md:py-20">
+      <div class="flex items-center space-x-2.5 mb-4">
+        <span class="w-3 h-3 bg-[#D60000] rounded-full"></span>
+        <span class="text-xs font-['Fira_Code'] font-bold tracking-widest text-[#D60000] uppercase">
+          NODE // LINKS_SECTOR
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tighter leading-none text-[#202836] uppercase select-none">
+        EXTERNAL <span class="text-[#D60000]">LINKS.</span>
+      </h1>
+      <p class="mt-4 text-[#4A5568] font-medium text-xs md:text-sm leading-relaxed">
+        GitHub、学習リソース、Webアプリ、お問い合わせ、お気に入りなど、カテゴリ別に整理された外部リンクのランチャー。
+      </p>
+    </div>
+  </section>
+
+  <!-- 縦積みカテゴリカード -->
+  <div class="max-w-3xl mx-auto px-6 py-12 md:py-20 space-y-12">
+    {categories.map((cat) => (
+      <section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
+        <!-- ホバー時に左端からスッと出現するメカニカル赤線 -->
+        <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
+
+        <!-- 【見出し】 -->
+        <div class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between">
+          <h2 class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white">
+            {cat.id} // {cat.label}
+          </h2>
+          <span class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider">
+            {cat.sub}
+          </span>
+        </div>
+
+        <!-- 【メインコンテンツ】リンク縦一覧 -->
+        <div class="divide-y-[3px] divide-[#202836]">
+          {cat.links.map((link) => (
+            <a
+              href={link.url}
+              target={link.url.startsWith("http") ? "_blank" : "_self"}
+              rel={link.url.startsWith("http") ? "noopener noreferrer" : ""}
+              class="relative flex flex-col p-6 hover:bg-[#F5F2EB] transition-colors duration-200 group/link overflow-hidden"
+            >
+              <!-- 個別リンクのホバー赤線（細め） -->
+              <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#D60000] scale-y-0 group-hover/link:scale-y-100 transition-transform origin-top duration-200"></div>
+
+              <div class="flex items-start justify-between gap-4 pl-2">
+                <div class="space-y-1.5 flex-1 min-w-0">
+                  <div class="flex items-center gap-2.5 flex-wrap">
+                    <span class={`text-[9px] font-['Fira_Code'] font-black px-2 py-0.5 tracking-widest uppercase ${link.badgeColor}`}>
+                      {link.badge}
+                    </span>
+                    <h3 class="text-sm md:text-base font-black text-[#202836] group-hover/link:text-[#D60000] transition-colors duration-200 truncate">
+                      {link.title}
+                    </h3>
+                  </div>
+                  <p class="text-xs text-[#4A5568] font-medium leading-relaxed">
+                    {link.description}
+                  </p>
+                </div>
+                <span class="text-xs font-black text-[#A0AEC0] group-hover/link:text-[#D60000] transition-colors duration-200 shrink-0 mt-0.5">
+                  {link.url === "#" ? "—" : link.url.startsWith("http") ? "OPEN ↗" : "GO ➔"}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- 【その他】フッター：カテゴリの件数表示 -->
+        <div class="px-6 py-3 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-[10px] font-['Fira_Code'] font-bold text-[#A0AEC0] uppercase tracking-widest">
+          <span>TOTAL: {cat.links.length} LINK{cat.links.length > 1 ? "S" : ""}</span>
+          <span class="text-[#D60000]">// {cat.key}</span>
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>

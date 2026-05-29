@@ -1,0 +1,137 @@
+---
+// モンドリアン・インダストリアル・ローディング画面コンポーネント
+const pathname = Astro.url.pathname;
+const isHomePage = pathname === '/' || pathname === '/index.html';
+const blockBaseClass = 'border-[1.5px] border-[#202836] block-fly-in';
+const blocks = [
+	{ key: 'r1-left-white', className: 'bg-white col-span-2 row-span-2', style: '--fly-x: -120vw; --fly-y: -100vh; --delay: 0ms;' },
+	{ key: 'r1-left-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: -80vw; --fly-y: -120vh; --delay: 30ms;' },
+	{ key: 'r1-center-beige', className: 'bg-[#EFEAE2] col-span-2 row-span-2', style: '--fly-x: 0vw; --fly-y: -150vh; --delay: 60ms;' },
+	{ key: 'r1-top-red', className: 'bg-[#D60000] col-span-3 row-span-1', style: '--fly-x: 50vw; --fly-y: -120vh; --delay: 90ms;' },
+	{ key: 'r1-small-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: 80vw; --fly-y: -120vh; --delay: 120ms;' },
+	{ key: 'r1-small-slate', className: 'bg-[#202836] col-span-1 row-span-1', style: '--fly-x: 100vw; --fly-y: -100vh; --delay: 150ms;' },
+	{ key: 'r1-right-beige', className: 'bg-[#EFEAE2] col-span-2 row-span-1', style: '--fly-x: 120vw; --fly-y: -80vh; --delay: 180ms;' },
+	{ key: 'r2-left-slate', className: 'bg-[#202836] col-span-1 row-span-1', style: '--fly-x: -100vw; --fly-y: -50vh; --delay: 40ms;' },
+	{ key: 'r2-center-slate', className: 'bg-[#202836] col-span-2 row-span-1', style: '--fly-x: 20vw; --fly-y: -100vh; --delay: 80ms;' },
+	{ key: 'r2-center-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: 40vw; --fly-y: -100vh; --delay: 110ms;' },
+	{ key: 'r2-right-white', className: 'bg-white col-span-1 row-span-1', style: '--fly-x: 90vw; --fly-y: -70vh; --delay: 140ms;' },
+	{ key: 'r2-right-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: 110vw; --fly-y: -50vh; --delay: 170ms;' },
+	{ key: 'r2-3-right-slate', className: 'bg-[#202836] col-span-2 row-span-2', style: '--fly-x: 150vw; --fly-y: 0vh; --delay: 200ms;' },
+	{ key: 'r3-left-beige', className: 'bg-[#EFEAE2] col-span-2 row-span-1', style: '--fly-x: -150vw; --fly-y: 0vh; --delay: 70ms;' },
+	{ key: 'r3-5-left-slate', className: 'bg-[#202836] col-span-1 row-span-3', style: '--fly-x: -100vw; --fly-y: 50vh; --delay: 100ms;' },
+	{ key: 'r3-5-logo', className: 'bg-[#D60000] col-span-4 row-span-3 p-4 flex items-center justify-center', style: '--fly-x: 0vw; --fly-y: 0vh; --delay: 250ms;', type: 'logo' },
+	{ key: 'r3-small-red', className: 'bg-[#D60000] col-span-1 row-span-1', style: '--fly-x: 100vw; --fly-y: -30vh; --delay: 130ms;' },
+	{ key: 'r3-small-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: 110vw; --fly-y: -10vh; --delay: 160ms;' },
+	{ key: 'r3-small-slate', className: 'bg-[#202836] col-span-1 row-span-1', style: '--fly-x: 120vw; --fly-y: 10vh; --delay: 190ms;' },
+	{ key: 'r4-left-red', className: 'bg-[#D60000] col-span-2 row-span-1', style: '--fly-x: -120vw; --fly-y: 50vh; --delay: 90ms;' },
+	{ key: 'r4-right-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: 80vw; --fly-y: 40vh; --delay: 120ms;' },
+	{ key: 'r4-right-red', className: 'bg-[#D60000] col-span-1 row-span-1', style: '--fly-x: 100vw; --fly-y: 50vh; --delay: 150ms;' },
+	{ key: 'r4-right-red-2', className: 'bg-[#D60000] col-span-1 row-span-1', style: '--fly-x: 120vw; --fly-y: 60vh; --delay: 180ms;' },
+	{ key: 'r4-5-right-beige', className: 'bg-[#EFEAE2] col-span-2 row-span-2', style: '--fly-x: 150vw; --fly-y: 100vh; --delay: 220ms;' },
+	{ key: 'r5-left-beige', className: 'bg-[#EFEAE2] col-span-2 row-span-1', style: '--fly-x: -100vw; --fly-y: 100vh; --delay: 110ms;' },
+	{ key: 'r5-right-beige', className: 'bg-[#EFEAE2] col-span-3 row-span-1', style: '--fly-x: 80vw; --fly-y: 120vh; --delay: 160ms;' },
+	{ key: 'r6-left-beige', className: 'bg-[#EFEAE2] col-span-2 row-span-1', style: '--fly-x: -120vw; --fly-y: 120vh; --delay: 130ms;' },
+	{ key: 'r6-bottom-beige', className: 'bg-[#EFEAE2] col-span-1 row-span-1', style: '--fly-x: -50vw; --fly-y: 150vh; --delay: 150ms;' },
+	{ key: 'r6-loader', className: 'bg-[#EFEAE2] col-span-4 row-span-1 flex items-center justify-center', style: '--fly-x: 0vw; --fly-y: 150vh; --delay: 280ms;', type: 'loader' },
+	{ key: 'r6-bottom-slate', className: 'bg-[#202836] col-span-2 row-span-1', style: '--fly-x: 50vw; --fly-y: 150vh; --delay: 170ms;' },
+	{ key: 'r6-footer', className: 'bg-[#EFEAE2] col-span-3 row-span-1 flex items-center justify-end pr-6', style: '--fly-x: 120vw; --fly-y: 120vh; --delay: 200ms;', type: 'footer' },
+];
+---
+
+{isHomePage && (
+	<!-- モンドリアン・インダストリアル・ローディング画面 -->
+	<div id="loader" class="fixed inset-0 bg-[#EFEAE2] z-[9999] w-screen h-screen overflow-hidden select-none pointer-events-auto transition-all duration-500 ease-in-out opacity-100 flex items-center justify-center">
+		<div class="w-full h-full grid grid-cols-12 grid-rows-6 gap-0 bg-[#202836] p-0 border-[3px] border-[#202836] relative">
+			{blocks.map((block) => (
+				<div class:list={[blockBaseClass, block.className]} style={block.style}>
+					{block.type === 'logo' && (
+						<div class="w-full h-full border-[6px] border-white flex items-center justify-center p-6 relative">
+							<img
+								src="/logo.png"
+								alt="KAIRO'S LAB LOGO"
+								class="w-full h-full max-w-80 max-h-80 md:max-w-80 md:max-h-80 object-contain logo-image mix-blend-multiply"
+							/>
+						</div>
+					)}
+					{block.type === 'loader' && (
+						<span id="loader-text" class="font-['Fira_Code'] font-black text-xl md:text-3xl text-[#202836] tracking-widest uppercase">
+							LOADING... 0%
+						</span>
+					)}
+					{block.type === 'footer' && (
+						<span class="text-[10px] md:text-xs font-bold text-[#A0AEC0] tracking-widest uppercase select-none">
+							Gasshin Shoutan — 臥薪嘗胆
+						</span>
+					)}
+				</div>
+			))}
+		</div>
+	</div>
+)}
+
+{isHomePage && (
+	<script>
+		// TOPページ限定の幾何学ローディングアニメーション
+		const loader = document.getElementById('loader');
+		const loaderText = document.getElementById('loader-text');
+
+		if (loader) {
+			let percent = 0;
+			const duration = 1700; // 短縮前(2.2s)と短縮後(1.2s)の中間値 1.7秒に調整
+			const startTime = performance.now();
+
+			const updatePercent = (now: number) => {
+				const elapsed = now - startTime;
+				const progress = Math.min(elapsed / duration, 1);
+				
+				// イージングをかけて滑らかに進行
+				const easeProgress = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+				percent = Math.floor(easeProgress * 100);
+
+				if (loaderText) {
+					loaderText.textContent = `LOADING... ${percent}%`;
+				}
+
+				if (progress < 1) {
+					requestAnimationFrame(updatePercent);
+				} else {
+					// 100%完了後、少し余韻を持たせてからシンプルにフェードアウト
+					setTimeout(() => {
+						loader.classList.add('opacity-0', 'pointer-events-none');
+						setTimeout(() => {
+							loader.style.display = 'none';
+						}, 500); // フェードアウトtransition-duration(500ms)に合わせる
+					}, 300); // 余韻を300msに調整
+				}
+			};
+
+			// 実行開始
+			requestAnimationFrame(updatePercent);
+		}
+	</script>
+)}
+
+<style>
+	/* ロゴ画像のスレート化 ＆ 白背景透過 */
+	.logo-image {
+		/* 黒(#000000)をダークインディゴ(#202836)に変換する高精度CSSフィルター */
+		filter: invert(13%) sepia(21%) saturate(996%) hue-rotate(182deg) brightness(97%) contrast(92%);
+		
+		/* シンプルに出現するフェードイン＆スケールアニメーション */
+		opacity: 0;
+		transform: scale(0.95);
+		animation: logoFadeIn 0.4s ease-out forwards;
+		animation-delay: 0.55s; /* 中間値の0.55秒に微調整 */
+	}
+
+	@keyframes logoFadeIn {
+		0% {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+</style>
