@@ -10,20 +10,14 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# 2. 実行用（Production）ステージ
-FROM node:24-alpine AS runner
-WORKDIR /app
+# 2. 実行用（Production）ステージ — Nginx で静的ファイルを直接配信
+FROM nginx:alpine AS runner
 
-# 本番環境であることを明示
-ENV NODE_ENV=production
-ENV HOST=0.0.0.0
-ENV PORT=4321
+# ビルド成果物（静的HTML/CSS/JS）を Nginx のドキュメントルートにコピー
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# ビルド成果物と必要なファイルをコピー
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
+# カスタム Nginx 設定を適用
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Astroの開発サーバーではなく本番プレビューを起動
-EXPOSE 4321
-CMD ["node", "./dist/server/entry.mjs"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
