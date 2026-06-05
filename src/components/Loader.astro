@@ -40,7 +40,7 @@ const blocks = [
 
 {isHomePage && (
 	<!-- モンドリアン・インダストリアル・ローディング画面 -->
-	<div id="loader" class="fixed inset-0 bg-[#EFEAE2] z-[9999] w-screen h-screen overflow-hidden select-none pointer-events-auto transition-all duration-500 ease-in-out opacity-100 flex items-center justify-center">
+	<div id="loader" class="fixed inset-0 bg-[#EFEAE2] z-9999 w-screen h-screen overflow-hidden select-none pointer-events-auto transition-all duration-500 ease-in-out opacity-100 flex items-center justify-center">
 		<div class="w-full h-full grid grid-cols-12 grid-rows-6 gap-0 bg-[#202836] p-0 border-[3px] border-[#202836] relative">
 			{blocks.map((block) => (
 				<div class:list={[blockBaseClass, block.className]} style={block.style}>

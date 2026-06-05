@@ -6,7 +6,7 @@
 
 ## 現在の作業
 
-- （なし。次のタスク選択待ち）
+- LINKS ページのコンテンツ実装
 
 ---
 
@@ -22,7 +22,7 @@
 ### 共通レイアウト
 
 - `src/layouts/Layout.astro`: 全ページ共通土台。Tailwind v4 インポート済み。Google Fonts（Noto Sans JP / Fira Code）読み込み済み。
-- `src/components/Header.astro`: 赤ドットロゴ + 3本線ハンバーガーメニュー（クリックでクロス変形）+ 3分割ブロックナビ（BLOG / PROFILE / LINKS）
+- `src/components/Header.astro`: 赤ドットロゴ + 3本線ハンバーガーメニュー（クリックでクロス変形）+ 4分割ブロックナビ（TOP / BLOG / PROFILE / LINKS）
 - `src/components/Footer.astro`: 「Gasshin Shoutan — 臥薪嘗胆」右下ミニマル配置
 - `src/components/Article.astro`: ブログ記事カード（3px 枠グリッド・ホバーで左端赤線出現）
 - `src/components/Loader.astro`: ローディング画面コンポーネント（実装済み）
@@ -30,7 +30,7 @@
 ### ページ
 
 - `src/pages/index.astro`: BLOG トップページ（ダミー記事データでグリッド表示）
-- `src/pages/profile.astro`: PROFILE ページ（土台作成済み）
+- `src/pages/profile.astro`: PROFILE ページ（コンテンツ実装済み）
 - `src/pages/links.astro`: LINKS ページ（土台作成済み）
 
 ### AI ドキュメント
@@ -43,7 +43,7 @@
 ## 次にやること
 
 - [ ] ブログ機能の本格化: `src/content/` の Markdown 記事を自動読み込みする仕組みへ切り替え（`content.config.ts` 設定）
-- [ ] PROFILE ページのコンテンツ実装（自己紹介・インフラ構成・縦積みカードレイアウト）
+- [ ] BLOG ページの作成
 - [ ] LINKS ページのコンテンツ実装（カテゴリ別リンク一覧・縦積みカードレイアウト）
 - [ ] TOPページのメインビジュアル画像追加検討
 - [ ] ブログ記事が増えた場合の「VIEW ARCHIVES」ボタン実装

@@ -47,14 +47,20 @@ const recentPosts = [
     <div class="max-w-3xl mx-auto px-6 py-16 md:py-20">
       <div class="flex items-center space-x-2.5 mb-4">
         <span class="w-3 h-3 bg-[#D60000] rounded-full"></span>
-        <span class="text-xs font-['Fira_Code'] font-bold tracking-widest text-[#D60000] uppercase">
+        <span
+          class="text-xs font-['Fira_Code'] font-bold tracking-widest text-[#D60000] uppercase"
+        >
           NODE // PROFILE_SECTOR
         </span>
       </div>
-      <h1 class="text-4xl md:text-6xl font-black tracking-tighter leading-none text-[#202836] uppercase select-none">
+      <h1
+        class="text-4xl md:text-6xl font-black tracking-tighter leading-none text-[#202836] uppercase select-none"
+      >
         ABOUT <span class="text-[#D60000]">KAIRO.</span>
       </h1>
-      <p class="mt-4 text-[#4A5568] font-medium text-xs md:text-sm leading-relaxed">
+      <p
+        class="mt-4 text-[#4A5568] font-medium text-xs md:text-sm leading-relaxed"
+      >
         ポートフォリオ、自宅サーバーハードウェア構成、および活動ログの集約。
       </p>
     </div>
@@ -62,7 +68,6 @@ const recentPosts = [
 
   <!-- 縦積みソリッドカードセクション -->
   <div class="max-w-3xl mx-auto px-6 py-12 md:py-20 space-y-12">
-
     <!-- ===================================================================
          カード 01: 自己紹介 (WHO I AM)
          TODO ①: 自己紹介テキストをkairoさん自身の言葉に書き換える
@@ -70,124 +75,176 @@ const recentPosts = [
          TODO ⑤: 「KR」テキストアイコンをアバター画像 <img src="/avatar.png"> に変更する
          =================================================================== -->
     <!-- カード 01: 自己紹介 (WHO I AM) -->
-    <section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
+    <section
+      class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300"
+    >
       <!-- ホバー時に左端からスッと出現するメカニカル赤線 -->
-      <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
-      
+      <div
+        class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"
+      >
+      </div>
+
       <!-- 【見出し】 -->
-      <div class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between">
-        <h2 class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white">01 // WHO I AM</h2>
-        <span class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider">PORTFOLIO // SECTOR</span>
+      <div
+        class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between"
+      >
+        <h2
+          class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white"
+        >
+          01 // WHO I AM
+        </h2>
+        <span
+          class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider"
+          >PORTFOLIO // SECTOR</span
+        >
       </div>
 
       <!-- 【メインコンテンツ】 -->
       <div class="p-6 md:p-8 space-y-6">
         <div class="flex items-center space-x-4">
-          <div class="w-14 h-14 bg-[#202836] text-white font-['Fira_Code'] font-black text-2xl flex items-center justify-center border-2 border-[#202836]">
+          <div
+            class="w-14 h-14 bg-[#202836] text-white font-['Fira_Code'] font-black text-2xl flex items-center justify-center border-2 border-[#202836]"
+          >
             KR
           </div>
           <div>
             <h3 class="text-xl font-black text-[#202836]">kairo</h3>
-            <p class="text-xs font-bold text-[#A0AEC0] tracking-wider uppercase font-['Fira_Code']">Self-Hosting Specialist / Engineer</p>
+            <p
+              class="text-xs font-bold text-[#A0AEC0] tracking-wider uppercase font-['Fira_Code']"
+            >
+            </p>
           </div>
         </div>
 
-        <p class="text-[#4A5568] text-sm md:text-base leading-relaxed font-medium">
-          インフラ構築とフロントエンド技術の交差点を追求するデベロッパー。無駄を極限まで排除した「ソリッド・ミニマリズム」をWebデザインとサーバー構成の双方で具現化することを信条としています。
-          自宅ラボ（Linux Mint + Docker）で様々なコンテナアプリケーションを常時ホストし、爆速かつ安全な配信環境を設計しています。
-        </p>
+        <ul>
+          <li>
+            清風情報工科学院/デザイン・コンピュータ学科/システム専攻 28年卒
+          </li>
+          <li>趣味：ゲーム, ギター, 料理</li>
+          <li>
+            好きなアーティスト：フレデリック, ヨルシカ, MOROHA, SKRYU, etc...
+          </li>
+          <li>座右の銘：臥薪嘗胆</li>
+        </ul>
 
         <div class="pt-4 border-t border-[#F1F5F9] space-y-3">
-          <h4 class="text-xs font-['Fira_Code'] font-black tracking-widest text-[#202836] uppercase">// CORE SKILLS</h4>
+          <h4
+            class="text-xs font-['Fira_Code'] font-black tracking-widest text-[#202836] uppercase"
+          >
+            // 資格
+          </h4>
           <div class="flex flex-wrap gap-2">
-            {["Astro v5", "Tailwind CSS", "Docker", "Linux Mint", "Git/GitHub", "Nginx"].map((skill) => (
-              <span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-2.5 py-0.5 uppercase tracking-wider bg-white">
-                {skill}
-              </span>
-            ))}
+            {
+              [
+                "基本情報技術者",
+                "ITパスポート",
+                "MOS Associate",
+                "J検3級",
+                "普通自動二輪（小型AT限定）",
+              ].map((skill) => (
+                <span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-2.5 py-0.5 uppercase tracking-wider bg-white">
+                  {skill}
+                </span>
+              ))
+            }
           </div>
         </div>
       </div>
 
       <!-- 【その他】 -->
-      <div class="px-6 py-4 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-xs font-bold text-[#4A5568]">
-        <span>STATUS: ACTIVE ONLINE</span>
-        <span class="text-[#A0AEC0]">2026.05.30 // LAST UPDATE</span>
+      <div
+        class="px-6 py-4 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-xs font-bold text-[#4A5568]"
+      >
+        <span></span>
+        <span class="text-[#A0AEC0]"></span>
       </div>
     </section>
 
     <!-- ===================================================================
-         カード 02: インフラ構成 (HOME LAB INFRA)
-         TODO ③: スペック表の各行を実機の仕様に書き換える
-           - MACHINE: 実際のマシン名 / モデルに変更
-           - CPU: 正確な型番・コア数・クロックに変更
-           - MEMORY: 実際の容量・メーカー・構成に変更
-           - STORAGE: 実際のSSD/HDD構成に変更
-           - RUNTIME: Docker / OS バージョンなどを確認して更新
-         TODO ⑥: uptime / temperature の表示値を実際の数値に変更（または削除）
+         カード 02: 
+         
          =================================================================== -->
-    <!-- カード 02: インフラ構成 (HOME LAB INFRA) -->
-    <section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
-      <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
-      
+    <!-- カード 02:  -->
+    <section
+      class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300"
+    >
+      <div
+        class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"
+      >
+      </div>
+
       <!-- 【見出し】 -->
-      <div class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between">
-        <h2 class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white">02 // HOME LAB INFRA</h2>
-        <span class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider">HARDWARE // SPEC</span>
+      <div
+        class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between"
+      >
+        <h2
+          class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white"
+        >
+          02 // やりたいことリスト
+        </h2>
+        <span
+          class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider"
+          >Bucket List</span
+        >
       </div>
 
       <!-- 【メインコンテンツ】 -->
       <div class="p-6 md:p-8 space-y-6">
-        <p class="text-[#4A5568] text-sm leading-relaxed font-medium">
-          自宅で24時間365日稼働している、無骨なインフラ環境の構成表です。
-        </p>
-
         <!-- 無骨なインダストリアルスペック表 -->
         <div class="border-[3px] border-[#202836] overflow-hidden">
-          <table class="w-full text-left border-collapse text-xs md:text-sm font-medium">
+          <table
+            class="w-full text-left border-collapse text-xs md:text-sm font-medium"
+          >
             <thead>
-              <tr class="bg-[#202836] text-white font-['Fira_Code'] text-[11px] md:text-xs">
-                <th class="p-3 border-r-2 border-[#202836]">COMPONENT</th>
-                <th class="p-3">SPECIFICATION</th>
+              <tr
+                class="bg-[#202836] text-white font-['Fira_Code'] text-[11px] md:text-xs"
+              >
+                <th class="p-3 border-r-2 border-[#202836]">Lineage</th>
+                <th class="p-3">Contents</th>
               </tr>
             </thead>
             <tbody class="divide-y-2 divide-[#202836]">
               <tr>
-                <td class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836] w-1/3">MACHINE</td>
-                <td class="p-3 text-[#4A5568] font-bold">KAIRO-NODE-01 (Custom Build)</td>
+                <td
+                  class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836] w-1/3"
+                  >技術系</td
+                >
+                <td class="p-3 text-[#4A5568] font-bold">
+                  <ul>
+                    <li>Windowsアプリ 音声検知</li>
+                    <li>Flutter Android ui構築練習</li>
+                    <li>Ruby on Rails</li>
+                    <li>Go</li>
+                    <li>サーバー、Linux関連</li>
+                    <li>Webサイト系</li>
+                    <li>メモアプリ</li>
+                    <li>競馬情報ライン送信アプリ</li>
+                  </ul>
+                </td>
               </tr>
-              <tr>
-                <td class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836]">OS</td>
-                <td class="p-3 text-[#4A5568] font-bold">Linux Mint 21.3 (Edge Edition)</td>
-              </tr>
-              <tr>
-                <td class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836]">CPU</td>
-                <td class="p-3 text-[#4A5568] font-bold">Intel Core i7-10700 (8C / 16T, 2.9GHz)</td>
-              </tr>
-              <tr>
-                <td class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836]">MEMORY</td>
-                <td class="p-3 text-[#4A5568] font-bold">64GB DDR4 (Crucial, Dual Channel)</td>
-              </tr>
-              <tr>
-                <td class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836]">STORAGE</td>
-                <td class="p-3 text-[#4A5568] font-bold">1TB NVMe SSD (System) + 4TB WD Red HDD</td>
-              </tr>
-              <tr>
-                <td class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836]">RUNTIME</td>
-                <td class="p-3 text-[#4A5568] font-bold">Docker Engine + Docker Compose</td>
-              </tr>
+              <td
+                class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836] w-1/3"
+                >趣味系</td
+              >
+              <td class="p-3 text-[#4A5568] font-bold">
+                <ul>
+                  <li>VALORANT</li>
+                  <li>Overwatch</li>
+                  <li>マイクラ</li>
+                  <li>ハーメルン</li>
+                </ul>
+              </td>
+              <tr> </tr>
             </tbody>
           </table>
         </div>
       </div>
 
       <!-- 【その他】 -->
-      <div class="px-6 py-4 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-xs font-bold text-[#4A5568]">
-        <div class="flex items-center space-x-1.5">
-          <span class="w-2.5 h-2.5 bg-[#D60000] rounded-full animate-pulse"></span>
-          <span>SYSTEM TEMPERATURE: 38°C</span>
-        </div>
-        <span class="text-[#A0AEC0]">uptime: 142 days</span>
+      <div
+        class="px-6 py-4 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-xs font-bold text-[#4A5568]"
+      >
+        <div class="flex items-center space-x-1.5"></div>
       </div>
     </section>
 
@@ -202,13 +259,27 @@ const recentPosts = [
               const recentPosts = allPosts.slice(0, 3); に変更
          =================================================================== -->
     <!-- カード 03: ブログ記事一覧 (RECENT LOGS) -->
-    <section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
-      <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
-      
+    <section
+      class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300"
+    >
+      <div
+        class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"
+      >
+      </div>
+
       <!-- 【見出し】 -->
-      <div class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between">
-        <h2 class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white">03 // RECENT LOGS</h2>
-        <span class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider">JOURNAL // ARCHIVE</span>
+      <div
+        class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between"
+      >
+        <h2
+          class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white"
+        >
+          03 // RECENT LOGS
+        </h2>
+        <span
+          class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider"
+          >JOURNAL // ARCHIVE</span
+        >
       </div>
 
       <!-- 【メインコンテンツ】 -->
@@ -218,27 +289,42 @@ const recentPosts = [
         </p>
 
         <!-- シンプルな縦積みブログ記事リスト -->
-        <div class="border-[3px] border-[#202836] divide-y-[3px] divide-[#202836]">
-          {recentPosts.map((post) => (
-            <div class="p-5 hover:bg-[#F5F2EB] transition-colors flex items-center justify-between gap-4">
-              <div class="space-y-1">
-                <span class="text-[10px] font-['Fira_Code'] font-bold text-[#A0AEC0]">{post.pubDate}</span>
-                <h4 class="text-sm md:text-base font-black text-[#202836] line-clamp-1">
-                  {post.title}
-                </h4>
+        <div
+          class="border-[3px] border-[#202836] divide-y-[3px] divide-[#202836]"
+        >
+          {
+            recentPosts.map((post) => (
+              <div class="p-5 hover:bg-[#F5F2EB] transition-colors flex items-center justify-between gap-4">
+                <div class="space-y-1">
+                  <span class="text-[10px] font-['Fira_Code'] font-bold text-[#A0AEC0]">
+                    {post.pubDate}
+                  </span>
+                  <h4 class="text-sm md:text-base font-black text-[#202836] line-clamp-1">
+                    {post.title}
+                  </h4>
+                </div>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="text-xs font-bold text-[#202836] hover:text-[#D60000] transition-colors shrink-0"
+                >
+                  READ ➔
+                </a>
               </div>
-              <a href={`/blog/${post.slug}`} class="text-xs font-bold text-[#202836] hover:text-[#D60000] transition-colors shrink-0">
-                READ ➔
-              </a>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
       <!-- 【その他】 -->
-      <a href="/" class="px-6 py-5 bg-[#F5F2EB] border-t-[3px] border-[#202836] hover:bg-[#D60000] hover:text-white transition-colors duration-200 flex items-center justify-between group/btn text-xs font-black text-[#202836] tracking-wider uppercase">
+      <a
+        href="/"
+        class="px-6 py-5 bg-[#F5F2EB] border-t-[3px] border-[#202836] hover:bg-[#D60000] hover:text-white transition-colors duration-200 flex items-center justify-between group/btn text-xs font-black text-[#202836] tracking-wider uppercase"
+      >
         <span>VIEW ALL POSTS IN BLOG</span>
-        <span class="group-hover/btn:translate-x-1.5 transition-transform duration-200">➔</span>
+        <span
+          class="group-hover/btn:translate-x-1.5 transition-transform duration-200"
+          >➔</span
+        >
       </a>
     </section>
 
@@ -248,28 +334,49 @@ const recentPosts = [
                   （現状は土台テキストのまま）
          =================================================================== -->
     <!-- カード 04: LINKSページへのリンク (DIRECT ROUTE) -->
-    <section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
-      <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
-      
+    <section
+      class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300"
+    >
+      <div
+        class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"
+      >
+      </div>
+
       <!-- 【見出し】 -->
-      <div class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between">
-        <h2 class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white">04 // DIRECT ROUTE</h2>
-        <span class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider">NAVIGATE // LINK</span>
+      <div
+        class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between"
+      >
+        <h2
+          class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white"
+        >
+          04 // DIRECT ROUTE
+        </h2>
+        <span
+          class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider"
+          >NAVIGATE // LINK</span
+        >
       </div>
 
       <!-- 【メインコンテンツ】 -->
       <div class="p-6 md:p-8 space-y-4">
-        <p class="text-[#4A5568] text-sm md:text-base leading-relaxed font-medium">
+        <p
+          class="text-[#4A5568] text-sm md:text-base leading-relaxed font-medium"
+        >
           GitHub、技術的なおすすめ情報ソース、お気に入りのWebサービス、Googleフォーム等、他サービスや各種外部リソースへのランチャーページへ直接アクセスします。
         </p>
       </div>
 
       <!-- 【その他】 -->
-      <a href="/links" class="px-6 py-5 bg-[#D60000] text-white border-t-[3px] border-[#202836] hover:bg-[#990000] transition-colors duration-200 flex items-center justify-between group/btn text-xs font-black tracking-wider uppercase">
+      <a
+        href="/links"
+        class="px-6 py-5 bg-[#D60000] text-white border-t-[3px] border-[#202836] hover:bg-[#990000] transition-colors duration-200 flex items-center justify-between group/btn text-xs font-black tracking-wider uppercase"
+      >
         <span>GO TO LINKS LAUNCHER</span>
-        <span class="group-hover/btn:translate-x-1.5 transition-transform duration-200">➔</span>
+        <span
+          class="group-hover/btn:translate-x-1.5 transition-transform duration-200"
+          >➔</span
+        >
       </a>
     </section>
-
   </div>
 </Layout>
