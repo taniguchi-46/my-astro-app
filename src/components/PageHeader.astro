@@ -1,0 +1,48 @@
+---
+interface Props {
+  tag: string;
+  tagPulse?: boolean;
+  title: string;
+  titleHighlight?: string;
+  breakLine?: boolean;
+  description?: string;
+  maxWidthClass?: string;
+  paddingClass?: string;
+  headingSizeClass?: string;
+  descriptionClass?: string;
+  tagSpacingClass?: string;
+  dotSizeClass?: string;
+}
+
+const {
+  tag,
+  tagPulse = false,
+  title,
+  titleHighlight,
+  breakLine = false,
+  description,
+  maxWidthClass = "max-w-3xl",
+  paddingClass = "py-16 md:py-20",
+  headingSizeClass = "text-4xl md:text-6xl",
+  descriptionClass = "mt-4 text-xs md:text-sm max-w-none",
+  tagSpacingClass = "mb-4",
+  dotSizeClass = "w-3 h-3",
+} = Astro.props;
+---
+
+<section class="border-b-[3px] border-[#202836] bg-white">
+  <div class={`${maxWidthClass} mx-auto px-6 ${paddingClass}`}>
+    <div class={`flex items-center space-x-2.5 ${tagSpacingClass}`}>
+      <span class={`${dotSizeClass} bg-[#D60000] rounded-full ${tagPulse ? "animate-pulse" : ""}`}></span>
+      <span class="text-xs font-['Fira_Code'] font-bold tracking-widest text-[#D60000] uppercase">
+        {tag}
+      </span>
+    </div>
+    <h1 class={`${headingSizeClass} font-black tracking-tighter leading-none text-[#202836] uppercase select-none`}>
+      {title}{breakLine ? <br /> : " "}{titleHighlight && <span class="text-[#D60000]">{titleHighlight}</span>}
+    </h1>
+    {description && (
+      <p class={`text-[#4A5568] font-medium leading-relaxed ${descriptionClass}`} set:html={description} />
+    )}
+  </div>
+</section>

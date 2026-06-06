@@ -1,0 +1,34 @@
+---
+interface Props {
+  id?: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { id, title, subtitle } = Astro.props;
+---
+
+<section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
+  <!-- ホバー時に左端からスッと出現するメカニカル赤線 -->
+  <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
+
+  <!-- 【見出し】 -->
+  <div class="bg-[#202836] px-6 py-4 border-b-[3px] border-[#202836] flex items-center justify-between">
+    <h2 class="font-['Fira_Code'] font-black tracking-widest text-sm md:text-base text-white">
+      {id ? `${id} // ` : ""}{title}
+    </h2>
+    {subtitle && (
+      <span class="text-[10px] font-['Fira_Code'] text-[#A0AEC0] font-bold uppercase tracking-wider">
+        {subtitle}
+      </span>
+    )}
+  </div>
+
+  <!-- 【メインコンテンツ】 -->
+  <slot />
+
+  <!-- 【その他/フッター】 -->
+  {Astro.slots.has('footer') && (
+    <slot name="footer" />
+  )}
+</section>

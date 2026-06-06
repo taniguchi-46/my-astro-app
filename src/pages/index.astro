@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Article from "../components/Article.astro";
+import PageHeader from "../components/PageHeader.astro";
 
 // まだMarkdown（contentコレクション）の作成や設定（config.ts）が終わっていなくても
 // 画面がクラッシュしないよう、安全のために初期状態のダミーデータを配列として定義しています。
@@ -31,30 +32,20 @@ const posts = [
 
 <Layout title="BLOG">
   <!-- メインビジュアル：横幅いっぱいの無骨なソリッドブロック -->
-  <section class="border-b-[3px] border-[#202836] bg-white">
-    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
-      <div class="flex items-center space-x-2.5 mb-6">
-        <span class="w-3.5 h-3.5 bg-[#D60000] rounded-full animate-pulse">
-        </span>
-        <span
-          class="text-xs font-['Fira_Code'] font-bold tracking-widest text-[#D60000] uppercase"
-          >SYSTEM NODE: ACTIVE
-        </span>
-      </div>
-      <h1
-        class="text-5xl md:text-8xl font-black tracking-tighter leading-none text-[#202836] select-none"
-      >
-        SELF-HOSTING<br />
-        <span class="text-[#D60000]">LOG & LAB.</span>
-      </h1>
-      <p
-        class="mt-8 text-[#4A5568] max-w-xl font-medium text-sm md:text-base leading-relaxed"
-      >
-        自宅サーバー構築の備忘録と、技術スタックの実験場。<br />
-        Linux Mint ＋ Docker 環境で稼働しているコンテナから爆速配信中。
-      </p>
-    </div>
-  </section>
+  <PageHeader
+    tag="SYSTEM NODE: ACTIVE"
+    tagPulse={true}
+    title="SELF-HOSTING"
+    titleHighlight="LOG & LAB."
+    breakLine={true}
+    description="自宅サーバー構築の備忘録と、技術スタックの実験場。<br />Linux Mint ＋ Docker 環境で稼働しているコンテナから爆速配信中。"
+    maxWidthClass="max-w-7xl"
+    paddingClass="py-20 md:py-28"
+    headingSizeClass="text-5xl md:text-8xl"
+    descriptionClass="mt-8 max-w-xl text-sm md:text-base"
+    tagSpacingClass="mb-6"
+    dotSizeClass="w-3.5 h-3.5"
+  />
 
   <!-- ブログ記事一覧：フレデリックを意識したソリッド・スクエログリッド -->
   <section class="max-w-7xl mx-auto px-6 py-12 md:py-20">
