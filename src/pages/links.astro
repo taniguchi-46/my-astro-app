@@ -5,21 +5,9 @@ import Layout from "../layouts/Layout.astro";
 // LINKS PAGE — 次回作業時のTODOリスト
 // =============================================================================
 //
-// TODO(優先度: 高)
-//   [ ] ① GitHubのURLを実際のkairoさんのFacebook/URLに変更する
-//         → 現在: "https://github.com/"
-//         → 変更先: "https://github.com/[kairo-username]"
 //   [ ] ② Google FormのURLを実際のフォームURLに変更する
 //         → 現在: "https://forms.google.com/"
 //         → 変更先: Google Formで作成したフォームのURLを貼り付け
-//
-// TODO(優先度: 中)
-//   [ ] ③ EXPERIMENTALカテゴリのWeb Appリンクを
-//         実際のデプロイURLに変更する（現在: "#"の工事中プレースホルダー）
-//   [ ] ④ FAVORITESカテゴリにお気に入りリンクを追加・入れ替える
-//         → 現在はフレデリック公式サイト、Coolorsの2件のみ
-//   [ ] ⑤ LEARNINGカテゴリに技術スタック別のおすすめ記事リンクを追加する
-//         （現在はAstro/Docker/Linux/Tailwindの4件）
 //
 // TODO(優先度: 低)
 //   [ ] ⑥ 新しいカテゴリの追加（例: SNSリンクカテゴリやツールカテゴリなど）
@@ -39,8 +27,8 @@ const categories = [
     links: [
       {
         title: "GitHub",
-        url: "https://github.com/", // TODO ①: "https://github.com/[kairoのusername]" に変更
-        description: "ソースコード・リポジトリの管理ハブ。全プロジェクトの起点。",
+        url: "https://github.com/taniguchi-46",
+        description: "mainブランチで作業しがち",
         badge: "CORE",
         badgeColor: "bg-[#202836] text-white",
       },
@@ -58,7 +46,7 @@ const categories = [
         badge: "INTERNAL",
         badgeColor: "bg-[#EFEAE2] text-[#202836] border border-[#202836]",
       },
-    ],
+    ]
   },
   {
     id: "02",
@@ -67,88 +55,66 @@ const categories = [
     sub: "KNOWLEDGE // BASE",
     links: [
       {
-        title: "Zenn — Astro",
-        url: "https://zenn.dev/topics/astro",
-        description: "Astro v5 関連の日本語技術記事が集まる良質なトピックハブ。",
-        badge: "ASTRO",
-        badgeColor: "bg-[#D60000] text-white",
-      },
-      {
-        title: "Zenn — Docker",
-        url: "https://zenn.dev/topics/docker",
-        description: "Dockerコンテナ化に関する実践的な記事と知見が豊富。",
-        badge: "DOCKER",
-        badgeColor: "bg-[#D60000] text-white",
-      },
-      {
-        title: "Qiita — Linux",
-        url: "https://qiita.com/tags/linux",
-        description: "Linux Mint / Debian系のトラブルシューティング記事を多数収録。",
-        badge: "LINUX",
+        title: "フラッター教科書",
+        url: "https://zenn.dev/heyhey1028/books/flutter-basics",
+        description: "flutterの教科書",
+        badge: "flutter",
         badgeColor: "bg-[#202836] text-white",
       },
-      {
-        title: "Tailwind CSS Docs",
-        url: "https://tailwindcss.com/docs",
-        description: "Tailwindの公式ドキュメント。クラスの探索と仕様確認の最前線。",
-        badge: "CSS",
-        badgeColor: "bg-[#202836] text-white",
-      },
-    ],
+    ]
   },
   {
     id: "03",
-    key: "EXPERIMENTAL",
-    label: "EXPERIMENTAL & APPS",
-    sub: "LAB // WORKS",
-    links: [
-      {
-        title: "Web App (Coming Soon)",
-        url: "#", // TODO ③: 実際のWeb AppデプロイURLに変更
-        description: "現在開発中のWebアプリケーション。詳細は後日公開予定。",
-        badge: "WIP",
-        badgeColor: "bg-[#A0AEC0] text-white",
-      },
-    ],
-  },
-  {
-    id: "04",
-    key: "COMMUNICATION",
-    label: "COMMUNICATION",
-    sub: "CONTACT // FORM",
-    links: [
-      {
-        title: "Google Form — お問い合わせ",
-        url: "https://forms.google.com/", // TODO ②: 実際のGoogle Form URLに変更
-        description: "フィードバック、コラボレーション依頼、その他お問い合わせはこちら。",
-        badge: "CONTACT",
-        badgeColor: "bg-[#D60000] text-white",
-      },
-    ],
-  },
-  {
-    id: "05",
     key: "FAVORITES",
     label: "FAVORITES",
     sub: "CURATION // LIST",
-    // TODO ④: お気に入りリンクを追加・入れ替える（以下の links 配列にエントリを追加）
     links: [
       {
-        title: "フレデリック — Official",
-        url: "https://www.frederic.jp/",
-        description: "このサイトのデザインに最大のインスピレーションを与えてくれたバンド。",
-        badge: "FAV",
-        badgeColor: "bg-[#D60000] text-white",
-      },
-      {
-        title: "Coolors — Color Palette",
-        url: "https://coolors.co/",
-        description: "カラーパレット生成の最強ツール。配色の洗練に欠かせない。",
-        badge: "DESIGN",
+        title: "フレデリック",
+        url: "https://frederic-official.com/",
+        description: "神戸にて結成された三原健司(Vo./Gt.)、三原康司(Ba.)の双子の兄弟と、赤頭隆児(Gt.)、高橋武(Dr.)で編成される4人組バンド。",
+        badge: "Artist",
         badgeColor: "bg-[#202836] text-white",
       },
-    ],
-  },
+      {
+        title: "ヨルシカ",
+        url: "https://yorushika.com/",
+        description: "コンポーザーの”n-buna”がボーカル”suis”を迎えて結成したバンド。",
+        badge: "Artist",
+        badgeColor: "bg-[#202836] text-white",
+      },
+      {
+        title: "SKRYU",
+        url: "https://skryu.bitfan.id/",
+        description: "1996年生9月3日生まれ　島根県出身のラッパー。",
+        badge: "Artist",
+        badgeColor: "bg-[#202836] text-white",
+      },
+      {
+        title: "suspended 4th",
+        url: "https://suspended-4th.com/",
+        description: "名古屋・栄の路上から現れたSuspended 4thは2013年結成。オンボーカルの楽曲からインストゥルメンタルのセッションまで熟し、多才なプレイで観る者を魅了し続けているロック・バンド。",
+        badge: "Artist",
+        badgeColor: "bg-[#202836] text-white",
+      },
+    ]
+  }
+  // {
+  //   id: "",
+  //   key: "",
+  //   label: "",
+  //   sub: "",
+  //   links: [
+  //     {
+  //       title: "",
+  //       url: "",
+  //       description: "",
+  //       badge: "",
+  //       badgeColor: "bg-[#202836] text-white",
+  //     },
+  //   ]
+  // }
+  
 ];
 ---
 
@@ -165,9 +131,6 @@ const categories = [
       <h1 class="text-4xl md:text-6xl font-black tracking-tighter leading-none text-[#202836] uppercase select-none">
         EXTERNAL <span class="text-[#D60000]">LINKS.</span>
       </h1>
-      <p class="mt-4 text-[#4A5568] font-medium text-xs md:text-sm leading-relaxed">
-        GitHub、学習リソース、Webアプリ、お問い合わせ、お気に入りなど、カテゴリ別に整理された外部リンクのランチャー。
-      </p>
     </div>
   </section>
 
