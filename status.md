@@ -1,12 +1,14 @@
 # 作業ステータス — KAIRO'S LAB
 
-最終更新: 2026-06-10
+最終更新: 2026-06-10（ALL POSTS コンポーネント化）
 
 ---
 
 ## 現在の作業
 
-（完了するタスクを追加してください）
+- [ ] ブログ記事のidを一元管理。ALL POSTS、NEW POSTSの表示idを共通化
+- [ ] タグで検索できる機能を追加
+- [ ] ブログ記事が一定数以上ある時ページネーションする機能を追加
 
 ---
 
@@ -41,6 +43,13 @@
 - `src/content/blog/first-post.md`: フロントマターの YAML フォーマット修正
 - `src/content/blog/test-post-2.md` / `test-post-3.md`: テスト用ダミー記事を2本作成
 
+### コンポーネント分割・リファクタリング
+
+- `src/components/AllPosts.astro`: 新規作成。ブログ一覧（ALL POSTS）セクションを独立コンポーネントとして切り出し。`getCollection("blog")` で全記事取得・`pubDate` 降順ソート・`Card.astro` 使用。
+- `src/pages/blog/index.astro`: ALL POSTSのインライン実装を削除し、`<AllPosts />` 一行に置き換えてリファクタリング。
+- `src/pages/profile.astro`: `allPosts` 未定義の既存バグ（ビルドエラー）を修正。`getCollection("blog")` のインポートと `const allPosts` 定義を追加。
+- Docker コンテナ（Node.js 24）内で `npm run build` 実行 → 全10ページ正常ビルド完了を確認。
+
 ### AI ドキュメント
 
 - `ai.md`: AI 引き継ぎ用指示書（プロジェクト概要・技術スタック・デザインルール・作業ルール）
@@ -50,13 +59,12 @@
 
 ## 次にやること
 
-- [ ] TOPページのメインビジュアル画像追加検討
-- [ ] 開発サーバーでの動作確認および静的ビルドテスト (`npm run build`)
+- [ ] ブログ記事のidを一元管理。ALL POSTS、NEW POSTSの表示idを共通化
 - [ ] タグで検索できる機能を追加
-- [ ] ブログ記事のidが一元管理。ALL POSTS、NEW POSTSの表示idを共通化
-- [ ] SQLiteなど新しい技術スタック追加検討
-- [ ] プロフィールページのブログ部分を修正
 - [ ] ブログ記事が一定数以上ある時ページネーションする機能を追加
+- [ ] TOPページのメインビジュアル画像追加検討
+- [ ] SQLiteなど新しい技術スタック追加検討
+- [ ] プロフィールページのブログ部分を修正（ダミーデータ → Content Collections切り替え）
 
 ---
 

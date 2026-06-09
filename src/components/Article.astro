@@ -57,7 +57,7 @@ const latestPosts = posts
 
             <div class="carousel-viewport overflow-hidden">
               <div class="carousel-track flex transition-transform duration-500 ease-out gap-4">
-                {latestPosts.map((post, index) => {
+                {latestPosts.map((post) => {
                   const pubDate =
                     post.data.pubDate instanceof Date
                       ? post.data.pubDate
@@ -69,12 +69,10 @@ const latestPosts = posts
                       day: "2-digit",
                     })
                     .replace(/\//g, ".");
-                  const idStr = String(index + 1).padStart(2, "0");
 
                   return (
                     <div class="carousel-slide flex-shrink-0 flex flex-col">
                       <SliderCard
-                        id={idStr}
                         title={post.data.title}
                         subtitle={dateStr}
                       >
