@@ -1,65 +1,297 @@
 ---
-type Post = {
-	slug: string;
-	data: {
-		title: string;
-		pubDate: Date | string;
-		description: string;
-		tags?: string[];
-	};
-};
+import { getCollection } from "astro:content";
+import SliderCard from "./SliderCard.astro";
 
-const { post } = Astro.props as { post: Post };
-const pubDate = post.data.pubDate instanceof Date
-	? post.data.pubDate
-	: new Date(post.data.pubDate);
+// 最新5件の記事を取得し日付降順でソート
+const posts = await getCollection("blog");
+const latestPosts = posts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5);
 ---
 
-<article class="bg-white p-8 border-[1.5px] border-[#202836] hover:bg-[#F5F2EB] transition-all duration-300 group relative overflow-hidden">
-	<!-- 装飾用のアクティブ赤線 (ホバー時に左端からスッと出現するメカニカルギミック) -->
-	<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300"></div>
+<div class="w-full" id="new-posts-carousel">
+  {
+    latestPosts.length > 0 ? (
+      <>
+        {/* セクション見出し */}
+        
+        <h2 class="text-3xl font-medium leading-15 text-[#202836] mb-8 font-['Fira_Code'] ">
+          LATEST POSTS ({latestPosts.length})
+        </h2>
+        
+        {/* 外枠：ボタン＋カードエリアをフレックスで横並び */}
+        <div class="flex items-center gap-3">
+          {/* ← 前へボタン（カードエリア外・左） */}
+          <button
+            class="carousel-prev shrink-0 w-10 h-10 flex items-center justify-center border-[3px] border-[#202836] bg-white text-[#202836] hover:bg-[#202836] hover:text-white transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none hover:shadow-[3px_3px_0px_0px_#202836] active:shadow-none"
+            disabled
+            aria-label="前へ"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-	<!-- ヘッダーメタ情報 -->
-	<div class="flex items-center justify-between mb-5">
-		<div class="flex items-center gap-2">
-			<span class="w-2 h-2 bg-[#D60000] rounded-full"></span>
-			<time class="text-xs font-bold code-font text-[#A0AEC0]">
-				{pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.')}
-			</time>
-		</div>
-		<span class="text-[10px] font-['Fira_Code'] font-bold text-[#D60000] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
-			NEW
-		</span>
-	</div>
+          {/* カルーセル表示領域（相対配置でフェードを重ねる） */}
+          <div class="relative flex-1 min-w-0">
+            {/* 左フェードグラデーション */}
+            <div
+              class="carousel-fade-left pointer-events-none absolute left-0 top-0 h-full w-10 z-10
+            bg-gradient-to-r from-white to-transparent opacity-0 transition-opacity duration-300"
+            />
+            {/* 右フェードグラデーション */}
+            <div
+              class="carousel-fade-right pointer-events-none absolute right-0 top-0 h-full w-10 z-10
+            bg-gradient-to-l from-white to-transparent"
+            />
 
-	<!-- タイトル -->
-	<h2 class="text-2xl font-black text-[#202836] group-hover:text-[#D60000] transition-colors duration-200 leading-snug">
-		<a href={`/blog/${post.slug}`} class="focus:outline-none">{post.data.title}</a>
-	</h2>
+            <div class="carousel-viewport overflow-hidden">
+              <div class="carousel-track flex transition-transform duration-500 ease-out gap-4">
+                {latestPosts.map((post, index) => {
+                  const pubDate =
+                    post.data.pubDate instanceof Date
+                      ? post.data.pubDate
+                      : new Date(post.data.pubDate);
+                  const dateStr = pubDate
+                    .toLocaleDateString("ja-JP", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .replace(/\//g, ".");
+                  const idStr = String(index + 1).padStart(2, "0");
 
-	<!-- あらすじ -->
-	<p class="mt-4 text-sm text-[#4A5568] line-clamp-2 leading-relaxed font-medium">
-		{post.data.description}
-	</p>
+                  return (
+                    <div class="carousel-slide flex-shrink-0 flex flex-col">
+                      <SliderCard
+                        id={idStr}
+                        title={post.data.title}
+                        subtitle={dateStr}
+                      >
+                        {/* メインコンテンツ */}
+                        <div class="px-6 py-6 flex-grow flex flex-col justify-between min-h-[140px]">
+                          <p class="text-sm text-[#4A5568] leading-relaxed font-medium line-clamp-3">
+                            {post.data.description}
+                          </p>
+                        </div>
 
-	<!-- フッタータグ & Readリンク -->
-	<div class="mt-8 pt-5 border-t border-[#F1F5F9] flex items-center justify-between gap-4">
-		<div class="flex flex-wrap gap-1.5">
-			{post.data.tags?.map((tag) => (
-				<span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-2 py-0.5 uppercase tracking-wider bg-white">
-					{tag}
-				</span>
-			))}
-		</div>
+                        {/* フッター */}
+                        <div
+                          slot="footer"
+                          class="px-6 py-4 bg-[#F8FAFC] border-t-2 border-[#202836] flex items-center justify-between gap-4 mt-auto"
+                        >
+                          <div class="flex flex-wrap gap-1.5 max-w-[60%] overflow-hidden">
+                            {post.data.tags?.slice(0, 2).map((tag) => (
+                              <span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-1.5 py-0.5 uppercase tracking-wider bg-white">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <a
+                            href={`/blog/${post.id}`}
+                            class="text-xs font-bold text-[#202836] hover:text-[#D60000] transition-colors duration-200 flex items-center shrink-0"
+                          >
+                            READ MORE{" "}
+                            <span class="ml-1 text-[#D60000] font-bold">➔</span>
+                          </a>
+                        </div>
+                      </SliderCard>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
-		<span class="text-xs font-bold text-[#202836] group-hover:text-[#D60000] transition-colors duration-200 flex items-center shrink-0">
-			READ MORE <span class="ml-1 text-[#D60000] font-bold">➔</span>
-		</span>
-	</div>
-</article>
+          {/* → 次へボタン（カードエリア外・右） */}
+          <button
+            class="carousel-next flex-shrink-0 w-10 h-10 flex items-center justify-center border-[3px] border-[#202836] bg-white text-[#202836] hover:bg-[#202836] hover:text-white transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none hover:shadow-[3px_3px_0px_0px_#202836] active:shadow-none"
+            aria-label="次へ"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
 
-<style>
-	.code-font {
-		font-family: 'Fira Code', monospace;
-	}
-</style>
+        {/* ドットインジケーター（カード一覧の下・中央） */}
+        <div class="flex justify-center mt-6">
+          <div class="carousel-dots flex gap-2" />
+        </div>
+      </>
+    ) : (
+      <div class="border-[3px] border-[#202836] bg-white p-12 text-center">
+        <p class="text-lg font-bold text-[#4A5568]">
+          新着記事は見つかりませんでした。
+        </p>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  function initCarousel() {
+    const carousels = document.querySelectorAll("#new-posts-carousel");
+
+    carousels.forEach((carousel) => {
+      const track = carousel.querySelector(".carousel-track") as HTMLElement;
+      const slides = carousel.querySelectorAll(".carousel-slide");
+      const prevBtn = carousel.querySelector(
+        ".carousel-prev",
+      ) as HTMLButtonElement;
+      const nextBtn = carousel.querySelector(
+        ".carousel-next",
+      ) as HTMLButtonElement;
+      const dotsContainer = carousel.querySelector(
+        ".carousel-dots",
+      ) as HTMLElement;
+
+      if (!track || slides.length === 0) return;
+
+      let currentIndex = 0;
+      let slidesToShow = 1;
+      let peekWidth = 0;
+
+      const fadeLeft = carousel.querySelector(
+        ".carousel-fade-left",
+      ) as HTMLElement;
+      const fadeRight = carousel.querySelector(
+        ".carousel-fade-right",
+      ) as HTMLElement;
+      const viewport = carousel.querySelector(
+        ".carousel-viewport",
+      ) as HTMLElement;
+
+      function updateDimensions() {
+        const isDesktop = window.innerWidth >= 768;
+        slidesToShow = isDesktop ? 2 : 1;
+        // デスクトップでは80px、モバイルでは24pxの見切れ幅を確保
+        peekWidth = isDesktop ? 80 : 24;
+
+        if (viewport) {
+          viewport.style.paddingLeft = `${peekWidth}px`;
+          viewport.style.paddingRight = `${peekWidth}px`;
+        }
+
+        // フェードの幅も見切れ幅の半分（1cm程度）に動的に調整
+        const fadeWidth = isDesktop ? 40 : 16;
+        if (fadeLeft) fadeLeft.style.width = `${fadeWidth}px`;
+        if (fadeRight) fadeRight.style.width = `${fadeWidth}px`;
+
+        // インジケータードットのクリアと再生成
+        dotsContainer.innerHTML = "";
+        const maxIndex = Math.max(0, slides.length - slidesToShow);
+
+        for (let i = 0; i <= maxIndex; i++) {
+          const dot = document.createElement("button");
+          dot.className = `w-3.5 h-3.5 border-[3px] border-[#202836] transition-all duration-300 cursor-pointer ${
+            i === currentIndex ? "bg-[#D60000]" : "bg-white"
+          } hover:bg-[#D60000]`;
+
+          dot.addEventListener("click", () => {
+            goToSlide(i);
+          });
+          dotsContainer.appendChild(dot);
+        }
+
+        // はみ出さないように調整
+        if (currentIndex > maxIndex) {
+          currentIndex = maxIndex;
+        }
+
+        updateCarousel();
+      }
+
+      function updateCarousel() {
+        const gap = 16; // gap-4 = 16px
+        const maxIndex = Math.max(0, slides.length - slidesToShow);
+        const viewportWidth = viewport?.getBoundingClientRect().width || 0;
+
+        // パディング（左右のpeekWidth）を除いた純粋なコンテンツエリア幅からスライド幅を計算
+        const contentWidth = viewportWidth - peekWidth * 2;
+        const slideWidth =
+          (contentWidth - gap * (slidesToShow - 1)) / slidesToShow;
+
+        slides.forEach((slide) => {
+          (slide as HTMLElement).style.width = `${slideWidth}px`;
+        });
+
+        const moveAmount = currentIndex * (slideWidth + gap);
+        track.style.transform = `translateX(-${moveAmount}px)`;
+
+        // ボタン状態の更新
+        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentIndex >= maxIndex;
+
+        // 左フェードは最初のスライドでは非表示
+        if (fadeLeft) fadeLeft.style.opacity = currentIndex === 0 ? "0" : "1";
+        // 右フェードは最後のスライドでは非表示
+        if (fadeRight)
+          fadeRight.style.opacity = currentIndex >= maxIndex ? "0" : "1";
+
+        // ドットのアクティブ表示更新
+        const dots = dotsContainer.querySelectorAll("button");
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add("bg-[#D60000]");
+            dot.classList.remove("bg-white");
+          } else {
+            dot.classList.add("bg-white");
+            dot.classList.remove("bg-[#D60000]");
+          }
+        });
+      }
+
+      function goToSlide(index: number) {
+        const maxIndex = Math.max(0, slides.length - slidesToShow);
+        currentIndex = Math.min(Math.max(0, index), maxIndex);
+        updateCarousel();
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+          goToSlide(currentIndex - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+          goToSlide(currentIndex + 1);
+        });
+      }
+
+      updateDimensions();
+
+      // リサイズハンドラ
+      let resizeTimeout: any;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateDimensions, 100);
+      });
+    });
+  }
+
+  // AstroのSPA対応・DOM初期化
+  document.addEventListener("DOMContentLoaded", initCarousel);
+  document.addEventListener("astro:after-swap", initCarousel);
+</script>

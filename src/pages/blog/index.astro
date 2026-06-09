@@ -1,0 +1,105 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Article from "../../components/Article.astro";
+import Card from "../../components/Card.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { getCollection } from "astro:content";
+
+// Markdown（contentコレクション）から全てのブログ記事を取得して日付降順でソート
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<Layout title="BLOG ARCHIVES">
+  <PageHeader
+    tag="SYSTEM NODE: ARCHIVES"
+    tagPulse={false}
+    title="BLOG"
+    titleHighlight="ARCHIVES."
+    breakLine={true}
+    maxWidthClass="max-w-7xl"
+    paddingClass="py-20 md:py-28"
+    headingSizeClass="text-5xl md:text-8xl"
+    descriptionClass="mt-8 max-w-xl text-sm md:text-base"
+    tagSpacingClass="mb-6"
+    dotSizeClass="w-3.5 h-3.5"
+  />
+
+  {/* NEW POSTS セクション (スライダー) */}
+  <section
+    class="max-w-7xl mx-auto px-6 py-12 md:py-16 border-b-[3px] border-[#202836]"
+  >
+  
+    <Article />
+  </section>
+
+  {/* ALL POSTS セクション (縦並び) */}
+  <section class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <h2
+      class="text-3xl font-medium leading-15 text-[#202836] mb-8 font-['Fira_Code']"
+    >
+      ALL POSTS ({sortedPosts.length})
+    </h2>
+
+    {
+      sortedPosts.length > 0 ? (
+        <div class="flex flex-col gap-8">
+          {sortedPosts.map((post, index) => {
+            const pubDate =
+              post.data.pubDate instanceof Date
+                ? post.data.pubDate
+                : new Date(post.data.pubDate);
+            const dateStr = pubDate
+              .toLocaleDateString("ja-JP", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })
+              .replace(/\//g, ".");
+            const idStr = String(sortedPosts.length - index).padStart(2, "0");
+
+            return (
+              <Card id={idStr} title={post.data.title} subtitle={dateStr}>
+                {/* メインコンテンツ */}
+                <div class="px-6 py-6 flex-grow">
+                  <p class="text-sm text-[#4A5568] leading-relaxed font-medium">
+                    {post.data.description}
+                  </p>
+                </div>
+
+                {/* フッター */}
+                <div
+                  slot="footer"
+                  class="px-6 py-4 bg-[#F8FAFC] border-t-2 border-[#202836] flex items-center justify-between gap-4"
+                >
+                  <div class="flex flex-wrap gap-1.5">
+                    {post.data.tags?.map((tag) => (
+                      <span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-2 py-0.5 uppercase tracking-wider bg-white">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="text-xs font-bold text-[#202836] hover:text-[#D60000] transition-colors duration-200 flex items-center shrink-0"
+                  >
+                    READ MORE{" "}
+                    <span class="ml-1 text-[#D60000] font-bold">➔</span>
+                  </a>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      ) : (
+        <div class="border-[3px] border-[#202836] bg-white p-12 text-center">
+          <p class="text-lg font-bold text-[#4A5568]">
+            記事が見つかりませんでした。
+          </p>
+        </div>
+      )
+    }
+  </section>
+</Layout>

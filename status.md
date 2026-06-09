@@ -1,12 +1,12 @@
 # 作業ステータス — KAIRO'S LAB
 
-最終更新: 2026-06-06
+最終更新: 2026-06-10
 
 ---
 
 ## 現在の作業
 
-- カードセクションなどの使い回しできる部位のコンポーネント、レイアウト化
+（完了するタスクを追加してください）
 
 ---
 
@@ -19,19 +19,27 @@
 - Docker 権限バグ（`permission denied`）の解消（sudoなし運用）
 - 本番デプロイ設定の不整合解消（Astro SSG + Nginx 静的配信コンテナの1つに統合）
 
-### 共通レイアウト
+### 共通レイアウト・ナビゲーション
 
 - `src/layouts/Layout.astro`: 全ページ共通土台。Tailwind v4 インポート済み。Google Fonts（Noto Sans JP / Fira Code）読み込み済み。
-- `src/components/Header.astro`: 赤ドットロゴ + 3本線ハンバーガーメニュー（クリックでクロス変形）+ 4分割ブロックナビ（TOP / BLOG / PROFILE / LINKS）
+- `src/components/Header.astro`: 赤ドットロゴ + 3本線ハンバーガーメニュー（クリックでクロス変形）+ 4分割ブロックナビ（TOPは `/` 、BLOGは `/blog` への修正完了）
 - `src/components/Footer.astro`: 「Gasshin Shoutan — 臥薪嘗胆」右下ミニマル配置
 - `src/components/Article.astro`: ブログ記事カード（3px 枠グリッド・ホバーで左端赤線出現）
 - `src/components/Loader.astro`: ローディング画面コンポーネント（実装済み）
 
 ### ページ
 
-- `src/pages/index.astro`: BLOG トップページ（ダミー記事データでグリッド表示）
+- `src/pages/index.astro`: TOPページ（最新記事を動的に最大2件表示し、3件以上ある場合に「VIEW ARCHIVES」ボタンを表示するよう改修）
+- `src/pages/blog/index.astro`: BLOG アーカイブ一覧ページ（Content CollectionsのContent Layer APIから全記事を動的取得して降順表示）
+- `src/pages/blog/[...slug].astro`: ブログ個別詳細ページ（Markdownレンダリングとインダストリアルスタイルでの表示）
 - `src/pages/profile.astro`: PROFILE ページ（コンテンツ実装済み）
 - `src/pages/links.astro`: LINKS ページ（コンテンツ実装済み）
+
+### ブログ機能・データ
+
+- `src/content.config.ts`: Content Layer API (`glob` loader) の設定適用、`pubDate` の型安全なパース
+- `src/content/blog/first-post.md`: フロントマターの YAML フォーマット修正
+- `src/content/blog/test-post-2.md` / `test-post-3.md`: テスト用ダミー記事を2本作成
 
 ### AI ドキュメント
 
@@ -42,11 +50,13 @@
 
 ## 次にやること
 
-- [ ] ブログ機能の本格化: `src/content/` の Markdown 記事を自動読み込みする仕組みへ切り替え（`content.config.ts` 設定）
-- [ ] BLOG ページの作成
-- [ ] カードセクションなどの使い回しできる部位のコンポーネント、レイアウト化
 - [ ] TOPページのメインビジュアル画像追加検討
-- [ ] ブログ記事が増えた場合の「VIEW ARCHIVES」ボタン実装
+- [ ] 開発サーバーでの動作確認および静的ビルドテスト (`npm run build`)
+- [ ] タグで検索できる機能を追加
+- [ ] ブログ記事のidが一元管理。ALL POSTS、NEW POSTSの表示idを共通化
+- [ ] SQLiteなど新しい技術スタック追加検討
+- [ ] プロフィールページのブログ部分を修正
+- [ ] ブログ記事が一定数以上ある時ページネーションする機能を追加
 
 ---
 

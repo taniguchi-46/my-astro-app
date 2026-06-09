@@ -3,12 +3,13 @@ interface Props {
   id?: string;
   title: string;
   subtitle?: string;
+  class?: string;
 }
 
-const { id, title, subtitle } = Astro.props;
+const { id, title, subtitle, class: className } = Astro.props;
 ---
 
-<section class="group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300">
+<section class={`group relative bg-white border-[3px] border-[#202836] flex flex-col overflow-hidden hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[6px_6px_0px_0px_#202836] transition-all duration-300 ${className || ''}`}>
   <!-- ホバー時に左端からスッと出現するメカニカル赤線 -->
   <div class="absolute left-0 top-0 bottom-0 w-[5px] bg-[#D60000] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 z-10"></div>
 
