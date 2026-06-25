@@ -132,7 +132,7 @@ const categories = [
   <!-- 縦積みカテゴリカード -->
   <div class="max-w-3xl mx-auto px-6 py-12 md:py-20 space-y-12">
     {categories.map((cat) => (
-      <Card id={cat.id} title={cat.label} subtitle={cat.sub}>
+      <Card title={cat.label} subtitle={cat.sub}>
         <!-- 【メインコンテンツ】リンク縦一覧 -->
         <div class="divide-y-[3px] divide-[#202836]">
           {cat.links.map((link) => (
