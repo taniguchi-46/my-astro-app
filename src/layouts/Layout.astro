@@ -15,7 +15,6 @@ import Article from "../components/Article.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("blog");
-
 ---
 
 <!doctype html>
@@ -33,7 +32,9 @@ const allPosts = await getCollection("blog");
 			rel="stylesheet"
 		/>
 	</head>
-	<body class="bg-[#EFEAE2] text-[#202836] font-['Noto_Sans_JP'] min-h-screen flex flex-col selection:bg-[#D60000] selection:text-white">
+	<body
+		class="bg-[#EFEAE2] text-[#202836] font-['Noto_Sans_JP'] min-h-screen flex flex-col selection:bg-[#D60000] selection:text-white"
+	>
 		<Loader />
 
 		<Header />
@@ -42,25 +43,32 @@ const allPosts = await getCollection("blog");
 			<slot />
 		</main>
 
-		{showLatestPosts && (
-			<section class="max-w-7xl mx-auto px-6 py-12 md:py-20 border-t-[3px] border-[#202836]">
-				<Article />
-				{allPosts.length > 3 && (
-					<div class="mt-12 flex justify-center">
-						<a
-							href="/blog"
-							class="inline-flex items-center justify-center gap-3 border-[3px] border-[#202836] bg-white text-[#202836] hover:bg-[#202836] hover:text-[#EFEAE2] font-black text-lg tracking-widest px-12 py-5 transition-all duration-300 group"
-						>
-							<span>VIEW ARCHIVES</span>
-							<span class="text-[#D60000] group-hover:translate-x-1 transition-transform">➔</span>
-						</a>
-					</div>
-				)}
-			</section>
-		)}
+		{
+			showLatestPosts && (
+				<div class="relative">
+					<div class="h-[3px] bg-[#202836] rounded-full"></div>
+				</div>
+				<section class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+					<Article />
+					{allPosts.length > 3 && (
+						<div class="mt-12 flex justify-center">
+							<a
+								href="/blog"
+								class="inline-flex items-center justify-center gap-3  bg-white text-[#202836] hover:bg-[#202836] hover:text-[#EFEAE2] font-black text-lg tracking-widest px-12 py-5 transition-all duration-300 group"
+							>
+								<span>VIEW ARCHIVES</span>
+								<span class="text-[#D60000] group-hover:translate-x-1 transition-transform">
+									➔
+								</span>
+							</a>
+						</div>
+					)}
+				</section>
+			)
+		}
 
 		<Footer />
-		
+
 		<!-- ローディング終了時の遷移時など、ここには何も記述せずにLoaderに閉じ込めています -->
 	</body>
 </html>
@@ -76,14 +84,14 @@ const allPosts = await getCollection("blog");
 	}
 	/* スクロールバーのベージュカラー調整 */
 	::-webkit-scrollbar-track {
-		background: #EFEAE2;
+		background: #efeae2;
 	}
 	::-webkit-scrollbar-thumb {
 		background: #202836;
 	}
 
 	/* --- モンドリアン・ローディングアニメーション --- */
-	
+
 	/* 1. ブロックの高速飛来エフェクト */
 	.block-fly-in {
 		opacity: 0;
@@ -103,7 +111,7 @@ const allPosts = await getCollection("blog");
 	}
 
 	/* 2. 中央幾何学ロゴのメカニカルスナップ組み立て */
-	
+
 	/* 水平メインライン：左端からスライド伸長 */
 	.logo-horizontal {
 		transform: scaleX(0);
@@ -112,7 +120,9 @@ const allPosts = await getCollection("blog");
 		animation-delay: 0.65s;
 	}
 	@keyframes logoDrawX {
-		to { transform: scaleX(1); }
+		to {
+			transform: scaleX(1);
+		}
 	}
 
 	/* 左側斜めライン：左下から精密にスライドイン */
@@ -134,7 +144,8 @@ const allPosts = await getCollection("blog");
 		opacity: 0;
 		transform: scaleY(0);
 		transform-origin: top;
-		animation: logoSnapRect 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; /* わずかに弾むクリック感 */
+		animation: logoSnapRect 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15)
+			forwards; /* わずかに弾むクリック感 */
 		animation-delay: 1.05s;
 	}
 
@@ -143,7 +154,8 @@ const allPosts = await getCollection("blog");
 		opacity: 0;
 		transform: scaleY(0);
 		transform-origin: bottom;
-		animation: logoSnapRect 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+		animation: logoSnapRect 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15)
+			forwards;
 		animation-delay: 1.2s;
 	}
 	@keyframes logoSnapRect {
