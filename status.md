@@ -6,59 +6,14 @@
 
 ## 現在の作業
 
-- [x] ブログ記事が一定数以上ある時ページネーションする機能を追加
+- [ ] プロフィールページから合言葉で就活用ページに遷移
 
 ---
 
 ## 完了したこと
 
-### インフラ・環境
+- [x] ブログ記事が一定数以上ある時ページネーションする機能を追加
 
-- Docker + Nginx による自宅サーバー公開環境の構築
-- Windows ローカル開発 → GitHub → サーバー反映フローの確立
-- Docker 権限バグ（`permission denied`）の解消（sudoなし運用）
-- 本番デプロイ設定の不整合解消（Astro SSG + Nginx 静的配信コンテナの1つに統合）
-
-### 共通レイアウト・ナビゲーション
-
-- `src/layouts/Layout.astro`: 全ページ共通土台。Tailwind v4 インポート済み。Google Fonts（Noto Sans JP / Fira Code）読み込み済み。
-- `src/components/Header.astro`: 赤ドットロゴ + 3本線ハンバーガーメニュー（クリックでクロス変形）+ 4分割ブロックナビ（TOPは `/` 、BLOGは `/blog` への修正完了）
-- `src/components/Footer.astro`: 「Gasshin Shoutan — 臥薪嘗胆」右下ミニマル配置
-- `src/components/Article.astro`: ブログ記事カード（3px 枠グリッド・ホバーで左端赤線出現）
-- `src/components/Loader.astro`: ローディング画面コンポーネント（実装済み）
-
-### ページ
-
-- `src/pages/index.astro`: TOPページ（最新記事を動的に最大2件表示し、3件以上ある場合に「VIEW ARCHIVES」ボタンを表示するよう改修）
-- `src/pages/blog/index.astro`: BLOG アーカイブ一覧ページ（Content CollectionsのContent Layer APIから全記事を動的取得して降順表示）
-- `src/pages/blog/[...slug].astro`: ブログ個別詳細ページ（Markdownレンダリングとインダストリアルスタイルでの表示）
-- `src/pages/profile.astro`: PROFILE ページ（コンテンツ実装済み）
-- `src/pages/links.astro`: LINKS ページ（コンテンツ実装済み）
-
-### ブログ機能・データ
-
-- `src/content.config.ts`: Content Layer API (`glob` loader) の設定適用、`pubDate` の型安全なパース
-- `src/content/blog/first-post.md`: フロントマターの YAML フォーマット修正
-- `src/content/blog/test-post-2.md` / `test-post-3.md`: テスト用ダミー記事を2本作成
-- ブログ一覧ページにページネーション機能を追加。1ページ20件表示、`/blog` を1ページ目、`/blog/page/2` 以降を静的生成する構成にした。
-- `src/lib/blog.ts`: ブログ記事の取得、`pubDate` 降順ソート、ページ分割、ページURL生成を共通化した。
-- `src/components/Pagination.astro`: ブログ一覧用ページネーションUIを追加した。
-- `src/components/Pagination.astro`: ページ数が増えた場合に、先頭・現在ページ周辺・末尾だけを表示し、中間を `...` で省略する表示にした。
-- `src/pages/blog/page/[page].astro`: ブログ一覧の2ページ目以降を静的生成するルートを追加した。
-- Node.js v24.14.0 のバンドル Node で Astro ビルドを実行し、26ページの静的生成が成功した。
-- `src/content/blog/dummy-post-01.md` から `src/content/blog/dummy-post-15.md` までのダミー記事を追加し、合計21記事でページネーション確認できる状態にした。
-
-### コンポーネント分割・リファクタリング
-
-- `src/components/AllPosts.astro`: 新規作成。ブログ一覧（ALL POSTS）セクションを独立コンポーネントとして切り出し。`getCollection("blog")` で全記事取得・`pubDate` 降順ソート・`Card.astro` 使用。
-- `src/pages/blog/index.astro`: ALL POSTSのインライン実装を削除し、`<AllPosts />` 一行に置き換えてリファクタリング。
-- `src/pages/profile.astro`: `allPosts` 未定義の既存バグ（ビルドエラー）を修正。`getCollection("blog")` のインポートと `const allPosts` 定義を追加。
-- Docker コンテナ（Node.js 24）内で `npm run build` 実行 → 全10ページ正常ビルド完了を確認。
-
-### AI ドキュメント
-
-- `ai.md`: AI 引き継ぎ用指示書（プロジェクト概要・技術スタック・デザインルール・作業ルール）
-- `status.md`: 本ファイル。作業状況トラッカー。
 
 ---
 
@@ -67,7 +22,6 @@
 - [ ] タグで検索できる機能を追加
 - [ ] TOPページのメインビジュアル画像追加検討
 - [ ] 右のスクロールバー部分の見た目を検討。下にスクロールした時スクロールバーの背景が切り取られているように見える
-- [ ] プロフィールページに合言葉で就活用ページに遷移
 - [ ] 外部公開
  
 ---
