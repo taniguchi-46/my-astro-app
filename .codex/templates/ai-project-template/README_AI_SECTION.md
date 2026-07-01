@@ -1,9 +1,9 @@
 ## AI Documents
 
-AI Agent 向けの共通ドキュメントと設定は、以下に整理しています。
+このプロジェクトでは、AI Agent 向けの共通ドキュメントと設定を以下に整理しています。
 
-- `docs/`: Codex、Antigravity、Continue、Cline などで共通利用する知識。
-- `.agents/skills/`: 必要な作業領域だけを参照するためのAgent向けスキルメモ。
-- `.codex/`: Codex 固有の設定、行動原則、テンプレート。
+- `docs/`: Agent 共通で参照するプロジェクト知識、作業状況、設計、規約。
+- `.agents/skills/`: 今後の開発で使う短い汎用作業メモ。
+- `.codex/`: Codex 固有の行動指針とテンプレート。
 
-AI 共通ルールは `docs/ai.md`、現在の作業状態は `docs/status.md` を参照してください。
+作業前に `docs/status.md` と `docs/ai.md` を確認してください。

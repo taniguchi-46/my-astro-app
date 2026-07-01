@@ -1,66 +1,60 @@
-# Astro Starter Kit: Basics
+# my-astro-app
 
-```sh
-npm create astro@latest -- --template basics
-```
+Astro 6 で構築している個人サイト / ブログ / ポートフォリオです。Markdown のブログ記事を Astro Content Collections で読み込み、静的サイトとしてビルドします。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 技術構成
 
-## 🚀 Project Structure
+| 項目 | 内容 |
+| --- | --- |
+| フレームワーク | Astro 6 |
+| 言語 | TypeScript / Astro |
+| スタイル | Tailwind CSS v4 |
+| コンテンツ | Astro Content Collections |
+| 実行環境 | Node.js `>=22.12.0` |
+| コンテナ | Docker / Docker Compose |
+| 配信 | Nginx |
 
-Inside of your Astro project, you'll see the following folders and files:
+## コマンド
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+| Command | Action |
+| --- | --- |
+| `npm install` | 依存関係をインストール |
+| `npm run dev` | 開発サーバーを起動 |
+| `npm run build` | 本番用ビルドを作成 |
+| `npm run preview` | ビルド結果をローカル確認 |
+| `npm run astro -- --help` | Astro CLI のヘルプを表示 |
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 🐳 Docker Development (Windows)
-
-Use the dev compose to run Astro in watch mode with file sync.
+## Docker 開発
 
 ```sh
 docker compose -f docker-compose.dev.yml up --build
 ```
 
-Then open http://localhost:4321.
+起動後、`http://localhost:4321` を開きます。
 
-## 👀 Want to learn more?
+## ディレクトリ構成
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```text
+src/
+  components/       再利用 UI コンポーネント
+  content/blog/     Markdown ブログ記事
+  layouts/          共通レイアウト
+  lib/              ブログ一覧やページネーションの共通処理
+  pages/            ルーティング
+  styles/           グローバル CSS
+
+public/             静的アセット
+docs/               プロジェクトと AI Agent 向けドキュメント
+.agents/skills/     Agent 向けの汎用作業メモ
+.codex/             Codex 固有設定とテンプレート
+```
 
 ## AI Documents
 
-AI Agent 向けの共通ドキュメントと設定は、以下に整理しています。
+AI Agent 向けの共通ドキュメントと設定を以下に整理しています。
 
-- `docs/`: Codex、Antigravity、Continue、Cline などで共通利用する知識。
-- `.agents/skills/`: 必要な作業領域だけを参照するためのAgent向けスキルメモ。
-- `.codex/`: Codex 固有の設定、行動原則、テンプレート。
+- `docs/`: Agent 共通で参照するプロジェクト知識、作業状況、設計、規約。
+- `.agents/skills/`: 今後の開発で使う短い汎用作業メモ。
+- `.codex/`: Codex 固有の行動指針とテンプレート。
 
-AI 共通ルールは `docs/ai.md`、現在の作業状態は `docs/status.md` を参照してください。
+作業前に `docs/status.md` と `docs/ai.md` を確認してください。

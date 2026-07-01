@@ -1,18 +1,17 @@
-# プロジェクト状態
+# プロジェクト状況
 
 最終更新: 2026-07-01
 
-このドキュメントは、プロジェクト固有の現在状態、完了事項、保留事項を記録します。AI 共通の行動原則は `ai.md` を参照してください。
-
-## プロジェクト概要
+## 概要
 
 | 項目 | 内容 |
-|------|------|
-| プロジェクト名 | my-astro-app |
-| サイト種別 | 個人サイト / ポートフォリオ / ブログ |
-| フレームワーク | Astro |
-| スタイル | Tailwind CSS |
+| --- | --- |
+| プロジェクト名 | `my-astro-app` |
+| 種別 | 個人サイト / ブログ / ポートフォリオ |
+| フレームワーク | Astro 6 |
 | 言語 | TypeScript / Astro |
+| スタイル | Tailwind CSS v4 |
+| コンテンツ | Astro Content Collections |
 | 実行環境 | Node.js `>=22.12.0` |
 | コンテナ | Docker / Docker Compose |
 | 配信 | Nginx |
@@ -20,11 +19,12 @@
 ## 主要コマンド
 
 | コマンド | 用途 |
-|----------|------|
-| `npm run dev` | 開発サーバー起動 |
-| `npm run build` | 本番ビルド |
-| `npm run preview` | ビルド結果のプレビュー |
-| `docker compose -f docker-compose.dev.yml up --build` | Docker 開発環境起動 |
+| --- | --- |
+| `npm run dev` | Astro 開発サーバーを起動 |
+| `npm run build` | 本番用ビルドを作成 |
+| `npm run preview` | ビルド結果をローカル確認 |
+| `docker compose -f docker-compose.dev.yml up --build` | Docker 開発環境を起動 |
+| `docker compose up --build` | 本番相当のコンテナ構成を起動 |
 
 ## 現在の構成
 
@@ -39,71 +39,59 @@ docs/
 
 .agents/
   skills/
+    skill.md
 
 .codex/
   AGENTS.md
   templates/
+    ai-project-template/
 
 src/
   components/
-  content/
+  content/blog/
   layouts/
+  lib/
   pages/
   styles/
 ```
 
-## 現在の作業
+## 完了済み
 
-- [x] AI 共通ドキュメントを `docs/` に集約。
-- [x] Codex 固有設定を `.codex/` に分離。
-- [x] `ai.md` と `status.md` を `docs/` に移動。
-- [x] README に AI ドキュメント構成を追加。
-- [x] `docs/ai.md` を AI 共通ルール中心に整理。
-- [x] `docs/status.md` をプロジェクト固有状態中心に整理。
-- [x] `.codex/templates/ai-project-template/` に再利用可能な AI プロジェクトテンプレートを追加。
-
-## 完了したこと
-
-- [x] ブログ記事一覧のページネーション機能を追加。
-- [x] AI 開発環境向けの基本ディレクトリ構成を追加。
-- [x] Agent 向けスキル配置先として `.agents/skills/` を追加。
-- [x] `.codex/AGENTS.md` に Codex 向け行動原則を追加。
-- [x] 新規プロジェクト向けの `SETUP.md` と `README_AI_SECTION.md` を追加。
+- ブログ一覧のページネーション処理を `src/lib/blog.ts` に分離済み。
+- `src/content.config.ts` で blog コレクションを定義済み。
+- `src/pages/blog/index.astro` と `src/pages/blog/page/[page].astro` でブログ一覧を提供済み。
+- `src/pages/blog/[...slug].astro` で記事詳細ページを提供済み。
+- `Header`, `Footer`, `PageHeader`, `Article`, `AllPosts`, `Pagination` などの主要コンポーネントを配置済み。
+- Docker / Docker Compose / Nginx の基本ファイルを配置済み。
+- AI Agent 向けの `docs/`, `.agents/`, `.codex/` 構成を導入済み。
 
 ## 次にやること
 
-- [ ] `docs/architecture.md` の詳細化。
-- [ ] `docs/conventions.md` の詳細化。
-- [ ] `docs/glossary.md` の用語追加。
-- [ ] 必要になった時点で `.agents/skills/` 配下にスキルメモを追加。
-- [ ] 実際の画面仕様に合わせて README の初期テンプレート部分を整理。
+- README を Astro 初期テンプレートからこのプロジェクト向けに整理する。
+- dummy / test 系の記事を実記事に差し替えるか、開発用データとして扱う方針を決める。
+- 文字化けしている Astro コンポーネント内コメントと表示文言を正常な日本語に直す。
+- `src/components/Welcome.astro` が不要であれば削除する。
+- `career.astro`, `profile.astro`, `links.astro` の内容を実データに合わせて更新する。
 
-## 保留・確認事項
+## 保留事項
 
-- `src/components/Welcome.astro` は Astro 初期テンプレート由来の可能性があるため、使用状況を確認する。
-- ブログ記事はダミーデータを含むため、公開前に実記事へ差し替える。
-- デザインルールは未整理のため、`docs/conventions.md` または `docs/architecture.md` に移す。
+- サイト名、プロフィール文、リンク集、キャリア情報の最終文言。
+- 本番デプロイ先と Nginx 設定の運用方針。
+- ブログ記事のタグ体系と公開日運用。
+- Tailwind のデザイントークンをどこまで共通化するか。
 
 ## 関連ファイル
 
 | ファイル | 役割 |
-|----------|------|
-| [`README.md`](../README.md) | プロジェクト概要 |
-| [`ai.md`](./ai.md) | AI 共通ガイド |
-| [`loop.md`](./loop.md) | AI 作業フロー |
-| [`architecture.md`](./architecture.md) | 設計情報テンプレート |
-| [`conventions.md`](./conventions.md) | 実装規約テンプレート |
-| [`glossary.md`](./glossary.md) | 用語集テンプレート |
-| [`../.codex/AGENTS.md`](../.codex/AGENTS.md) | Codex 固有の行動原則 |
-| [`../.codex/templates/ai-project-template/SETUP.md`](../.codex/templates/ai-project-template/SETUP.md) | AI プロジェクトテンプレートの導入手順 |
-| [`../package.json`](../package.json) | npm scripts と依存関係 |
-| [`../astro.config.mjs`](../astro.config.mjs) | Astro / Tailwind 設定 |
-| [`../docker-compose.yml`](../docker-compose.yml) | 本番用 Docker 構成 |
-| [`../docker-compose.dev.yml`](../docker-compose.dev.yml) | 開発用 Docker 構成 |
-| [`../nginx.conf`](../nginx.conf) | Nginx 設定 |
-| [`../src/layouts/Layout.astro`](../src/layouts/Layout.astro) | 全ページ共通レイアウト |
-| [`../src/components/Header.astro`](../src/components/Header.astro) | ヘッダー / ナビゲーション |
-| [`../src/pages/index.astro`](../src/pages/index.astro) | トップページ |
-| [`../src/pages/profile.astro`](../src/pages/profile.astro) | プロフィールページ |
-| [`../src/pages/links.astro`](../src/pages/links.astro) | リンクページ |
-| [`../src/pages/career.astro`](../src/pages/career.astro) | キャリアページ |
+| --- | --- |
+| `README.md` | プロジェクト概要 |
+| `package.json` | npm scripts と依存関係 |
+| `astro.config.mjs` | Astro / Tailwind 設定 |
+| `src/content.config.ts` | Content Collections schema |
+| `src/lib/blog.ts` | ブログ一覧、ページネーションの共通処理 |
+| `src/layouts/Layout.astro` | 全ページ共通レイアウト |
+| `src/components/Header.astro` | ヘッダーとナビゲーション |
+| `src/pages/index.astro` | トップページ |
+| `src/pages/blog/index.astro` | ブログ一覧 |
+| `src/pages/blog/page/[page].astro` | ブログ一覧のページネーション |
+| `src/pages/blog/[...slug].astro` | ブログ記事詳細 |

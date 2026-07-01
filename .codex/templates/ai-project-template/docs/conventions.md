@@ -1,47 +1,29 @@
-# コーディング規約
+# 実装規約
 
-このドキュメントは、プロジェクト内の命名や実装規約を整理するためのテンプレートです。
+`{{PROJECT_NAME}}` の命名、構成、実装ルールです。
 
-## 命名規則
+## 基本
 
-TODO
+- 既存の設計と命名を優先する。
+- 変更は依頼範囲に絞る。
+- 共通化は重複や複雑さを実際に減らす場合だけ行う。
 
-## ファイル名
+## 命名
 
-TODO
+| 対象 | ルール | 例 |
+| --- | --- | --- |
+| ファイル | TODO | TODO |
+| 関数 | TODO | TODO |
+| 型 | TODO | TODO |
+| 定数 | TODO | TODO |
 
-## Component / Widget
+## 実装
 
-TODO
+- TODO: フレームワーク固有の実装方針を書く。
+- TODO: データ取得、エラー処理、UI 状態の方針を書く。
 
-## Class
+## 確認
 
-TODO
+{{PRIMARY_COMMANDS}}
 
-## Service
-
-TODO
-
-## Repository
-
-TODO
-
-## DTO
-
-TODO
-
-## Entity
-
-TODO
-
-## UseCase
-
-TODO
-
-## コメント
-
-TODO
-
-## import順
-
-TODO
+- TODO: 変更後に確認する項目を書く。

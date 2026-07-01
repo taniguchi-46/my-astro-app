@@ -1,47 +1,64 @@
-# コーディング規約
+# 実装規約
 
-このドキュメントは、プロジェクト内の命名や実装規約を整理するためのテンプレートです。
+このプロジェクトの命名、構成、実装ルールです。
 
-## 命名規則
+## 基本
 
-TODO
+- 既存の Astro コンポーネント構成を優先する。
+- ページは `src/pages/` に置き、URL 構造とファイル構造を一致させる。
+- 再利用する UI は `src/components/` に置く。
+- データ取得やページネーションなどの共通処理は `src/lib/` に置く。
+- グローバルなスタイルは `src/styles/global.css` に置く。
 
-## ファイル名
+## 命名
 
-TODO
+| 対象 | ルール | 例 |
+| --- | --- | --- |
+| Astro コンポーネント | PascalCase | `PageHeader.astro` |
+| ページ | URL に合わせた lowercase | `profile.astro` |
+| ライブラリ関数 | camelCase | `getSortedBlogPosts` |
+| 定数 | UPPER_SNAKE_CASE | `BLOG_POSTS_PER_PAGE` |
+| 型 | PascalCase | `BlogPageData` |
 
-## Widget
+## Astro / TypeScript
 
-TODO
+- frontmatter で import とデータ準備を行い、テンプレート側は表示に集中させる。
+- 型は既存の `astro:content` 型を活用する。
+- 共通処理を追加するときは、先に `src/lib/` に似た責務の関数がないか確認する。
+- import パスは既存ファイルの相対 import に合わせる。
 
-## Class
+## Markdown 記事
 
-TODO
+`src/content/blog/` に記事を追加するときは、次の frontmatter を入れる。
 
-## Service
+```md
+---
+title: "記事タイトル"
+pubDate: 2026-07-01
+description: "記事の説明"
+tags: ["tag"]
+---
+```
 
-TODO
+- `pubDate` は日付として解釈できる形式にする。
+- `tags` は文字列配列にする。
+- dummy / test 記事は本番公開前に扱いを決める。
 
-## Repository
+## UI / CSS
 
-TODO
-
-## DTO
-
-TODO
-
-## Entity
-
-TODO
-
-## UseCase
-
-TODO
+- Tailwind utility class を優先する。
+- 既存の色、余白、フォント指定に合わせる。
+- モバイル幅で文字がボタンやカードからはみ出さないようにする。
+- クリックできる要素には `aria-label` などアクセシビリティ情報を必要に応じて追加する。
 
 ## コメント
 
-TODO
+- 文字化けしたコメントは残さない。
+- コードから読み取れる説明コメントは追加しない。
+- 複雑な処理や意図が伝わりにくい箇所にだけ短いコメントを置く。
 
-## import順
+## 確認
 
-TODO
+- 通常の変更後は `npm run build` を確認する。
+- 記事一覧やページネーションを触った場合は `/blog`, `/blog/page/2`, 記事詳細の生成を確認する。
+- Docker / Nginx を触った場合は compose 起動または設定レビューを行う。
