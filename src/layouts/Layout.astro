@@ -77,17 +77,30 @@ const allPosts = await getCollection("blog");
 	/* 全ページ共通のスタイル調整 */
 	html {
 		scroll-behavior: smooth;
+		scrollbar-color: #202836 #d8d1c6;
+		scrollbar-width: thin;
 	}
-	/* スクロールバーもインダストリアルに */
+	/* スクロールバーは通常背景と分離しつつ、既存ブランド色に合わせる */
 	::-webkit-scrollbar {
-		width: 8px;
+		background: transparent;
+		width: 16px;
+		height: 16px;
 	}
-	/* スクロールバーのベージュカラー調整 */
 	::-webkit-scrollbar-track {
-		background: #efeae2;
+		background: #d8d1c6;
 	}
 	::-webkit-scrollbar-thumb {
 		background: #202836;
+		background-clip: content-box;
+		border: 3px solid #d8d1c6;
+		border-radius: 999px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #d60000;
+		background-clip: content-box;
+	}
+	::-webkit-scrollbar-corner {
+		background: #d8d1c6;
 	}
 
 	/* --- モンドリアン・ローディングアニメーション --- */
