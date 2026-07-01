@@ -1,0 +1,155 @@
+﻿---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Card from "../components/Card.astro";
+---
+
+<Layout title="CAREER PROFILE" showLatestPosts={false}>
+  <PageHeader
+    tag="HIDDEN NODE // CAREER_PROFILE"
+    title="CAREER"
+    titleHighlight="PROFILE."
+    breakLine={false}
+    description=""
+  />
+
+  <div class="max-w-3xl mx-auto px-6 py-12 md:py-20 space-y-12">
+    <Card title="WHO I AM" subtitle="PORTFOLIO // SECTOR">
+      <div class="p-6 md:p-8 space-y-6">
+        <div class="flex items-center space-x-4">
+          <div
+            class="w-14 h-14 bg-[#202836] text-white font-['Fira_Code'] font-black text-2xl flex items-center justify-center border-2 border-[#202836]"
+          >
+            AA
+          </div>
+          <div>
+            <h3 class="text-xl font-black text-[#202836]">kairo</h3>
+            <p
+              class="text-xs font-bold text-[#A0AEC0] tracking-wider uppercase font-['Fira_Code']"
+            >
+            </p>
+          </div>
+        </div>
+
+        <ul>
+          <li>
+            淳心情報工学専門学校 / デザイン・コンピュータ学科 / システム専攻 2028年卒
+          </li>
+          <li>趣味: ゲーム, ギター, 料理</li>
+          <li>
+            好きなアーティスト: フレデリック, ヨルシカ, MOROHA, SKRYU, etc...
+          </li>
+          <li>座右の銘: 継続は力なり</li>
+        </ul>
+        <div class="pt-4 border-t border-[#F1F5F9] space-y-3">
+          <h4
+            class="text-xs font-['Fira_Code'] font-black tracking-widest text-[#202836] uppercase"
+          >
+            // 資格
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            {
+              [
+                "基本情報技術者",
+                "ITパスポート",
+                "MOS Associate",
+                "J検",
+                "普通自動車免許",
+              ].map((skill) => (
+                <span class="text-[10px] font-['Fira_Code'] font-bold text-[#202836] border border-[#202836] px-2.5 py-0.5 uppercase tracking-wider bg-white">
+                  {skill}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      <div
+        slot="footer"
+        class="px-6 py-4 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-xs font-bold text-[#4A5568]"
+      >
+        <span></span>
+        <span class="text-[#A0AEC0]"></span>
+      </div>
+    </Card>
+    <Card title="やりたいことリスト" subtitle="Bucket List">
+      <div class="p-6 md:p-8 space-y-6">
+        <div class="border-[3px] border-[#202836] overflow-hidden">
+          <table
+            class="w-full text-left border-collapse text-xs md:text-sm font-medium"
+          >
+            <thead>
+              <tr
+                class="bg-[#202836] text-white font-['Fira_Code'] text-[11px] md:text-xs"
+              >
+                <th class="p-3 border-r-2 border-[#202836]">Lineage</th>
+                <th class="p-3">Contents</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-2 divide-[#202836]">
+              <tr>
+                <td
+                  class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836] w-1/3"
+                  >技術系</td
+                >
+                <td class="p-3 text-[#4A5568] font-bold">
+                  <ul>
+                    <li>Windowsアプリ 音声認識</li>
+                    <li>Flutter Android UI構築練習</li>
+                    <li>Ruby on Rails</li>
+                    <li>Go</li>
+                    <li>サーバー / Linux関連</li>
+                    <li>Webサイト制作</li>
+                    <li>メモアプリ</li>
+                    <li>競馬情報ライン配信アプリ</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="p-3 bg-[#F5F2EB] font-['Fira_Code'] font-bold border-r-2 border-[#202836] text-[#202836] w-1/3"
+                  >趣味系</td
+                >
+                <td class="p-3 text-[#4A5568] font-bold">
+                  <ul>
+                    <li>VALORANT</li>
+                    <li>Overwatch</li>
+                    <li>マインクラフト</li>
+                    <li>ハーメルン</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        slot="footer"
+        class="px-6 py-4 bg-[#F5F2EB] border-t-[3px] border-[#202836] flex items-center justify-between text-xs font-bold text-[#4A5568]"
+      >
+        <div class="flex items-center space-x-1.5"></div>
+      </div>
+    </Card>
+    <Card title="DIRECT ROUTE" subtitle="NAVIGATE // LINK">
+      <div class="p-6 md:p-8 space-y-4">
+        <p
+          class="text-[#4A5568] text-sm md:text-base leading-relaxed font-medium"
+        >
+          GitHub、技術的なおすすめ情報ソース、お気に入りのWebサービス、Googleフォームなど、外部リソースへのランチャーページへ移動します。
+        </p>
+      </div>
+      <a
+        slot="footer"
+        href="/links"
+        class="px-6 py-5 bg-[#D60000] text-white border-t-[3px] border-[#202836] hover:bg-[#990000] transition-colors duration-200 flex items-center justify-between group/btn text-xs font-black tracking-wider uppercase"
+      >
+        <span>GO TO LINKS LAUNCHER</span>
+        <span
+          class="group-hover/btn:translate-x-1.5 transition-transform duration-200"
+          >→</span
+        >
+      </a>
+    </Card>
+
+  </div>
+</Layout>
