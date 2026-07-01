@@ -1,24 +1,35 @@
 ---
-import { getCollection } from "astro:content";
+import type { BlogPost } from "../lib/blog";
 import Card from "./Card.astro";
 
-// Markdown（contentコレクション）から全てのブログ記事を取得して日付降順でソート
-const posts = await getCollection("blog");
-const sortedPosts = posts.sort(
-  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-);
+interface Props {
+  posts: BlogPost[];
+  totalPosts: number;
+  currentPage?: number;
+  lastPage?: number;
+}
+
+const { posts, totalPosts, currentPage, lastPage } = Astro.props;
 ---
 
 <h2
   class="text-3xl font-medium leading-15 text-[#202836] mb-8 font-['Fira_Code']"
 >
-  ALL POSTS ({sortedPosts.length})
+  ALL POSTS ({totalPosts})
 </h2>
 
 {
-  sortedPosts.length > 0 ? (
+  lastPage && lastPage > 1 && currentPage && (
+    <p class="mb-8 text-xs md:text-sm font-['Fira_Code'] font-bold tracking-widest text-[#4A5568]">
+      PAGE {currentPage} / {lastPage}
+    </p>
+  )
+}
+
+{
+  posts.length > 0 ? (
     <div class="flex flex-col gap-8">
-      {sortedPosts.map((post) => {
+      {posts.map((post) => {
         const pubDate =
           post.data.pubDate instanceof Date
             ? post.data.pubDate

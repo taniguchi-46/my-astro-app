@@ -1,16 +1,38 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Article from "../../components/Article.astro";
-import AllPosts from "../../components/AllPosts.astro";
-import PageHeader from "../../components/PageHeader.astro";
-import Pagination from "../../components/Pagination.astro";
-import { getBlogPageData, getSortedBlogPosts } from "../../lib/blog";
+import Layout from "../../../layouts/Layout.astro";
+import Article from "../../../components/Article.astro";
+import AllPosts from "../../../components/AllPosts.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Pagination from "../../../components/Pagination.astro";
+import {
+  getBlogPageData,
+  getLastBlogPage,
+  getSortedBlogPosts,
+  type BlogPageData,
+} from "../../../lib/blog";
 
-const posts = await getSortedBlogPosts();
-const blogPage = getBlogPageData(posts, 1);
+export async function getStaticPaths() {
+  const posts = await getSortedBlogPosts();
+  const lastPage = getLastBlogPage(posts.length);
+
+  return Array.from({ length: Math.max(0, lastPage - 1) }, (_, index) => {
+    const currentPage = index + 2;
+
+    return {
+      params: { page: String(currentPage) },
+      props: { blogPage: getBlogPageData(posts, currentPage) },
+    };
+  });
+}
+
+interface Props {
+  blogPage: BlogPageData;
+}
+
+const { blogPage } = Astro.props;
 ---
 
-<Layout title="BLOG ARCHIVES">
+<Layout title={`BLOG ARCHIVES - PAGE ${blogPage.currentPage}`}>
   <PageHeader
     tag="SYSTEM NODE: ARCHIVES"
     tagPulse={false}

@@ -1,12 +1,12 @@
 # 作業ステータス — KAIRO'S LAB
 
-最終更新: 2026-06-10（ALL POSTS コンポーネント化）
+最終更新: 2026-07-01（ブログ一覧20件ページネーション調整）
 
 ---
 
 ## 現在の作業
 
-- [ ] ブログ記事が一定数以上ある時ページネーションする機能を追加
+- [x] ブログ記事が一定数以上ある時ページネーションする機能を追加
 
 ---
 
@@ -40,6 +40,12 @@
 - `src/content.config.ts`: Content Layer API (`glob` loader) の設定適用、`pubDate` の型安全なパース
 - `src/content/blog/first-post.md`: フロントマターの YAML フォーマット修正
 - `src/content/blog/test-post-2.md` / `test-post-3.md`: テスト用ダミー記事を2本作成
+- ブログ一覧ページにページネーション機能を追加。1ページ20件表示、`/blog` を1ページ目、`/blog/page/2` 以降を静的生成する構成にした。
+- `src/lib/blog.ts`: ブログ記事の取得、`pubDate` 降順ソート、ページ分割、ページURL生成を共通化した。
+- `src/components/Pagination.astro`: ブログ一覧用ページネーションUIを追加した。
+- `src/pages/blog/page/[page].astro`: ブログ一覧の2ページ目以降を静的生成するルートを追加した。
+- Node.js v24.14.0 のバンドル Node で Astro ビルドを実行し、26ページの静的生成が成功した。
+- `src/content/blog/dummy-post-01.md` から `src/content/blog/dummy-post-15.md` までのダミー記事を追加し、合計21記事でページネーション確認できる状態にした。
 
 ### コンポーネント分割・リファクタリング
 

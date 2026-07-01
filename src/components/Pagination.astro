@@ -1,0 +1,80 @@
+---
+interface Props {
+  currentPage: number;
+  lastPage: number;
+  prevUrl?: string;
+  nextUrl?: string;
+  pageUrls: {
+    page: number;
+    url: string;
+  }[];
+}
+
+const { currentPage, lastPage, prevUrl, nextUrl, pageUrls } = Astro.props;
+---
+
+{
+  lastPage > 1 && (
+    <nav
+      class="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 border-[3px] border-[#202836] bg-white p-4"
+      aria-label="ブログ一覧ページネーション"
+    >
+      {prevUrl ? (
+        <a
+          href={prevUrl}
+          class="inline-flex min-w-32 items-center justify-center border-[3px] border-[#202836] bg-white px-5 py-3 text-xs font-black tracking-widest text-[#202836] hover:bg-[#202836] hover:text-white transition-colors duration-200"
+        >
+          <span class="mr-2 text-[#D60000]">←</span>
+          PREV
+        </a>
+      ) : (
+        <span
+          class="inline-flex min-w-32 items-center justify-center border-[3px] border-[#A0AEC0] bg-[#F8FAFC] px-5 py-3 text-xs font-black tracking-widest text-[#A0AEC0]"
+          aria-disabled="true"
+        >
+          <span class="mr-2">←</span>
+          PREV
+        </span>
+      )}
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        {pageUrls.map(({ page, url }) =>
+          page === currentPage ? (
+            <span
+              class="flex h-11 w-11 items-center justify-center border-[3px] border-[#202836] bg-[#D60000] text-sm font-black text-white font-['Fira_Code']"
+              aria-current="page"
+            >
+              {page}
+            </span>
+          ) : (
+            <a
+              href={url}
+              class="flex h-11 w-11 items-center justify-center border-[3px] border-[#202836] bg-white text-sm font-black text-[#202836] font-['Fira_Code'] hover:bg-[#202836] hover:text-white transition-colors duration-200"
+              aria-label={`ブログ一覧 ${page} ページ目へ`}
+            >
+              {page}
+            </a>
+          ),
+        )}
+      </div>
+
+      {nextUrl ? (
+        <a
+          href={nextUrl}
+          class="inline-flex min-w-32 items-center justify-center border-[3px] border-[#202836] bg-white px-5 py-3 text-xs font-black tracking-widest text-[#202836] hover:bg-[#202836] hover:text-white transition-colors duration-200"
+        >
+          NEXT
+          <span class="ml-2 text-[#D60000]">→</span>
+        </a>
+      ) : (
+        <span
+          class="inline-flex min-w-32 items-center justify-center border-[3px] border-[#A0AEC0] bg-[#F8FAFC] px-5 py-3 text-xs font-black tracking-widest text-[#A0AEC0]"
+          aria-disabled="true"
+        >
+          NEXT
+          <span class="ml-2">→</span>
+        </span>
+      )}
+    </nav>
+  )
+}
