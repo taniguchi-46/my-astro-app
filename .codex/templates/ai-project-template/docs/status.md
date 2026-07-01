@@ -24,7 +24,22 @@
 ## 現在の構成
 
 ```text
-TODO: 主要ディレクトリ構成を記載する
+docs/
+  ai.md
+  status.md
+  loop.md
+  architecture.md
+  conventions.md
+  glossary.md
+
+.agents/
+  skills/
+
+.codex/
+  AGENTS.md
+  templates/
+
+TODO: プロジェクト固有の主要ディレクトリを追記する
 ```
 
 ## 現在の作業

@@ -36,12 +36,9 @@ docs/
   architecture.md
   conventions.md
   glossary.md
+
+.agents/
   skills/
-    flutter.md
-    rails.md
-    testing.md
-    ui.md
-    review.md
 
 .codex/
   AGENTS.md
@@ -69,7 +66,7 @@ src/
 
 - [x] ブログ記事一覧のページネーション機能を追加。
 - [x] AI 開発環境向けの基本ディレクトリ構成を追加。
-- [x] `docs/skills/` にスキル別テンプレートを追加。
+- [x] Agent 向けスキル配置先として `.agents/skills/` を追加。
 - [x] `.codex/AGENTS.md` に Codex 向け行動原則を追加。
 - [x] 新規プロジェクト向けの `SETUP.md` と `README_AI_SECTION.md` を追加。
 
@@ -78,7 +75,7 @@ src/
 - [ ] `docs/architecture.md` の詳細化。
 - [ ] `docs/conventions.md` の詳細化。
 - [ ] `docs/glossary.md` の用語追加。
-- [ ] `docs/skills/*.md` の内容追加。
+- [ ] 必要になった時点で `.agents/skills/` 配下にスキルメモを追加。
 - [ ] 実際の画面仕様に合わせて README の初期テンプレート部分を整理。
 
 ## 保留・確認事項

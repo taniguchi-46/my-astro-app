@@ -12,7 +12,7 @@
 4. 作業フローは `docs/loop.md` を参照する。
 5. 設計判断が必要な場合は `docs/architecture.md` を参照する。
 6. 命名や実装方針が必要な場合は `docs/conventions.md` を参照する。
-7. 必要な場合のみ `docs/skills/` 配下の関連ファイルを参照する。
+7. 必要な場合のみ `.agents/skills/` 配下の関連ファイルを参照する。
 
 ## 基本原則
 

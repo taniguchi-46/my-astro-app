@@ -7,7 +7,7 @@
 1. この `ai-project-template/` の中身を新規プロジェクトのルートへコピーする。
 2. `docs/status.md` の TODO をプロジェクト情報に合わせて埋める。
 3. `docs/architecture.md` と `docs/conventions.md` に最低限の方針を記載する。
-4. 利用する技術に関係する `docs/skills/*.md` だけを詳細化する。
+4. 利用する技術に関係するスキルメモが必要な場合は `.agents/skills/` 配下に追加する。
 5. README がある場合は `README_AI_SECTION.md` の内容を追記する。
 6. Codex を使う場合は `.codex/AGENTS.md` をプロジェクトに合わせて確認する。
 
@@ -15,6 +15,7 @@
 
 ```text
 docs/
+.agents/
 .codex/
 README_AI_SECTION.md
 ```
