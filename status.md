@@ -43,6 +43,7 @@
 - ブログ一覧ページにページネーション機能を追加。1ページ20件表示、`/blog` を1ページ目、`/blog/page/2` 以降を静的生成する構成にした。
 - `src/lib/blog.ts`: ブログ記事の取得、`pubDate` 降順ソート、ページ分割、ページURL生成を共通化した。
 - `src/components/Pagination.astro`: ブログ一覧用ページネーションUIを追加した。
+- `src/components/Pagination.astro`: ページ数が増えた場合に、先頭・現在ページ周辺・末尾だけを表示し、中間を `...` で省略する表示にした。
 - `src/pages/blog/page/[page].astro`: ブログ一覧の2ページ目以降を静的生成するルートを追加した。
 - Node.js v24.14.0 のバンドル Node で Astro ビルドを実行し、26ページの静的生成が成功した。
 - `src/content/blog/dummy-post-01.md` から `src/content/blog/dummy-post-15.md` までのダミー記事を追加し、合計21記事でページネーション確認できる状態にした。

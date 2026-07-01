@@ -1,16 +1,16 @@
 ---
+import type { PaginationItem } from "../lib/blog";
+
 interface Props {
   currentPage: number;
   lastPage: number;
   prevUrl?: string;
   nextUrl?: string;
-  pageUrls: {
-    page: number;
-    url: string;
-  }[];
+  paginationItems: PaginationItem[];
 }
 
-const { currentPage, lastPage, prevUrl, nextUrl, pageUrls } = Astro.props;
+const { currentPage, lastPage, prevUrl, nextUrl, paginationItems } =
+  Astro.props;
 ---
 
 {
@@ -38,24 +38,35 @@ const { currentPage, lastPage, prevUrl, nextUrl, pageUrls } = Astro.props;
       )}
 
       <div class="flex flex-wrap items-center justify-center gap-2">
-        {pageUrls.map(({ page, url }) =>
-          page === currentPage ? (
+        {paginationItems.map((item) => {
+          if (item.type === "ellipsis") {
+            return (
+              <span
+                class="flex h-11 w-11 items-center justify-center text-sm font-black text-[#4A5568] font-['Fira_Code']"
+                aria-hidden="true"
+              >
+                ...
+              </span>
+            );
+          }
+
+          return item.page === currentPage ? (
             <span
               class="flex h-11 w-11 items-center justify-center border-[3px] border-[#202836] bg-[#D60000] text-sm font-black text-white font-['Fira_Code']"
               aria-current="page"
             >
-              {page}
+              {item.page}
             </span>
           ) : (
             <a
-              href={url}
+              href={item.url}
               class="flex h-11 w-11 items-center justify-center border-[3px] border-[#202836] bg-white text-sm font-black text-[#202836] font-['Fira_Code'] hover:bg-[#202836] hover:text-white transition-colors duration-200"
-              aria-label={`ブログ一覧 ${page} ページ目へ`}
+              aria-label={`ブログ一覧 ${item.page} ページ目へ`}
             >
-              {page}
+              {item.page}
             </a>
-          ),
-        )}
+          );
+        })}
       </div>
 
       {nextUrl ? (

@@ -1,8 +1,19 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-export const BLOG_POSTS_PER_PAGE = 20;
+export const BLOG_POSTS_PER_PAGE = 15;
 
 export type BlogPost = CollectionEntry<"blog">;
+
+export type PaginationItem =
+  | {
+    type: "page";
+    page: number;
+    url: string;
+  }
+  | {
+    type: "ellipsis";
+    key: string;
+  };
 
 export interface BlogPageData {
   posts: BlogPost[];
@@ -11,10 +22,7 @@ export interface BlogPageData {
   lastPage: number;
   prevUrl?: string;
   nextUrl?: string;
-  pageUrls: {
-    page: number;
-    url: string;
-  }[];
+  paginationItems: PaginationItem[];
 }
 
 export async function getSortedBlogPosts() {
@@ -33,6 +41,38 @@ export function getLastBlogPage(totalPosts: number) {
   return Math.max(1, Math.ceil(totalPosts / BLOG_POSTS_PER_PAGE));
 }
 
+export function getPaginationItems(
+  currentPage: number,
+  lastPage: number,
+): PaginationItem[] {
+  const visiblePages = new Set<number>([1, lastPage]);
+  const start = Math.max(1, currentPage - 2);
+  const end = Math.min(lastPage, currentPage + 2);
+
+  for (let page = start; page <= end; page += 1) {
+    visiblePages.add(page);
+  }
+
+  const pages = [...visiblePages].sort((a, b) => a - b);
+
+  return pages.flatMap((page, index) => {
+    const previousPage = pages[index - 1];
+    const items: PaginationItem[] = [];
+
+    if (previousPage && page - previousPage > 1) {
+      items.push({ type: "ellipsis", key: `${previousPage}-${page}` });
+    }
+
+    items.push({
+      type: "page",
+      page,
+      url: getBlogPageUrl(page),
+    });
+
+    return items;
+  });
+}
+
 export function getBlogPageData(
   posts: BlogPost[],
   currentPage: number,
@@ -49,13 +89,6 @@ export function getBlogPageData(
     lastPage,
     prevUrl: currentPage > 1 ? getBlogPageUrl(currentPage - 1) : undefined,
     nextUrl: currentPage < lastPage ? getBlogPageUrl(currentPage + 1) : undefined,
-    pageUrls: Array.from({ length: lastPage }, (_, index) => {
-      const page = index + 1;
-
-      return {
-        page,
-        url: getBlogPageUrl(page),
-      };
-    }),
+    paginationItems: getPaginationItems(currentPage, lastPage),
   };
 }
