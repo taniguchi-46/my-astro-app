@@ -14,13 +14,17 @@ const { posts, totalPosts, currentPage, lastPage } = Astro.props;
 
 <h2
   class="text-3xl font-medium leading-15 text-[#202836] mb-8 font-['Fira_Code']"
+  data-blog-posts-heading
 >
   ALL POSTS ({totalPosts})
 </h2>
 
 {
   lastPage && lastPage > 1 && currentPage && (
-    <p class="mb-8 text-xs md:text-sm font-['Fira_Code'] font-bold tracking-widest text-[#4A5568]">
+    <p
+      class="mb-8 text-xs md:text-sm font-['Fira_Code'] font-bold tracking-widest text-[#4A5568]"
+      data-blog-page-indicator
+    >
       PAGE {currentPage} / {lastPage}
     </p>
   )
@@ -28,7 +32,7 @@ const { posts, totalPosts, currentPage, lastPage } = Astro.props;
 
 {
   posts.length > 0 ? (
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8" data-blog-posts-list>
       {posts.map((post) => {
         const pubDate =
           post.data.pubDate instanceof Date

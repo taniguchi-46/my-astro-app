@@ -57,21 +57,12 @@ src/
 
 ## 完了済み
 
-- ブログ一覧のページネーション処理を `src/lib/blog.ts` に分離済み。
-- `src/content.config.ts` で blog コレクションを定義済み。
-- `src/pages/blog/index.astro` と `src/pages/blog/page/[page].astro` でブログ一覧を提供済み。
-- `src/pages/blog/[...slug].astro` で記事詳細ページを提供済み。
-- `Header`, `Footer`, `PageHeader`, `Article`, `AllPosts`, `Pagination` などの主要コンポーネントを配置済み。
-- Docker / Docker Compose / Nginx の基本ファイルを配置済み。
-- AI Agent 向けの `docs/`, `.agents/`, `.codex/` 構成を導入済み。
-- 右のスクロールバー部分を通常背景と分離した配色・太さ・ピル形状に調整済み。
 
 ## 次にやること
 
 - dummy / test 系の記事を実記事に差し替えるか、開発用データとして扱う方針を決める。
 - `src/components/Welcome.astro` が不要であれば削除する。
 - `career.astro`, `profile.astro`, `links.astro` の内容を実データに合わせて更新する。
-- タグで検索できる機能を追加
 - TOPページのメインビジュアル画像追加検討
 - 外部公開
 
