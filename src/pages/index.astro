@@ -4,14 +4,16 @@ import PageHeader from "../components/PageHeader.astro";
 ---
 
 <Layout title="BLOG">
-  <!-- メインビジュアル：横幅いっぱいの無骨なソリッドブロック -->
   <PageHeader
     tag="SYSTEM NODE: ACTIVE"
     tagPulse={true}
     title="SELF-HOSTING"
     titleHighlight="LOG & LAB."
     breakLine={true}
-    description="自宅サーバー構築の備忘録と、技術スタックの実験場。<br />Linux Mint ＋ Docker 環境で稼働しているコンテナから爆速配信中。"
+    descriptionLines={[
+      "自宅サーバー構築の備忘録と、技術スタックの実験場。",
+      "Linux Mint + Docker 環境で稼働しているコンテナから配信中。",
+    ]}
     maxWidthClass="max-w-7xl"
     paddingClass="py-20 md:py-28"
     headingSizeClass="text-5xl md:text-8xl"
@@ -19,6 +21,4 @@ import PageHeader from "../components/PageHeader.astro";
     tagSpacingClass="mb-6"
     dotSizeClass="w-3.5 h-3.5"
   />
-
-  <!-- ブログ記事一覧はLayout経由でフッター前に表示 -->
 </Layout>

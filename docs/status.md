@@ -88,3 +88,6 @@ src/
 | `src/pages/blog/index.astro` | ブログ一覧 |
 | `src/pages/blog/page/[page].astro` | ブログ一覧のページネーション |
 | `src/pages/blog/[...slug].astro` | ブログ記事詳細 |
+## 次にやること（追記）
+
+- Nginx の `Content-Security-Policy` 追加を検討する。Google Fonts と Astro のインライン script/style への影響を確認してから実装する。

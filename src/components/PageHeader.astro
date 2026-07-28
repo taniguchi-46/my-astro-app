@@ -6,6 +6,7 @@ interface Props {
   titleHighlight?: string;
   breakLine?: boolean;
   description?: string;
+  descriptionLines?: string[];
   maxWidthClass?: string;
   paddingClass?: string;
   headingSizeClass?: string;
@@ -21,6 +22,7 @@ const {
   titleHighlight,
   breakLine = false,
   description,
+  descriptionLines,
   maxWidthClass = "max-w-3xl",
   paddingClass = "py-16 md:py-20",
   headingSizeClass = "text-4xl md:text-6xl",
@@ -41,8 +43,17 @@ const {
     <h1 class={`${headingSizeClass} font-black tracking-tighter leading-none text-[#202836] uppercase select-none`}>
       {title}{breakLine ? <br /> : " "}{titleHighlight && <span class="text-[#D60000]">{titleHighlight}</span>}
     </h1>
-    {description && (
-      <p class={`text-[#4A5568] font-medium leading-relaxed ${descriptionClass}`} set:html={description} />
+    {(description || descriptionLines?.length) && (
+      <p class={`text-[#4A5568] font-medium leading-relaxed ${descriptionClass}`}>
+        {descriptionLines?.length
+          ? descriptionLines.map((line, index) => (
+              <Fragment>
+                {index > 0 && <br />}
+                {line}
+              </Fragment>
+            ))
+          : description}
+      </p>
     )}
   </div>
 </section>
